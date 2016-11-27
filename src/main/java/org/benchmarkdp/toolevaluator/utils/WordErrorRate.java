@@ -79,7 +79,6 @@ public class WordErrorRate {
 				if (rWords[i - 1].compareTo(nWords[j - 1]) != 0) {
 					subCost = 1;
 				}
-				int value = 0;
 				if (mat[i - 1][j].totalOp + 1 < mat[i][j - 1].totalOp + 1) {
 					if (mat[i - 1][j].totalOp + 1 < mat[i - 1][j - 1].totalOp + subCost) {
 						mat[i][j] = new MatEl(mat[i - 1][j]);
