@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MeasureValue {
 
-	Map<String, Object> measureValues;
+	private Map<String, Object> measureValues;
 
 	public MeasureValue() {
 		measureValues = new HashMap<String, Object>();

@@ -27,6 +27,11 @@ public class GroundTruthElement implements IElement {
 		return textEl;
 	}
 
+	public void clearMeasures() {
+		mEl = new MeasureValue();
+		
+	}
+	
 	public MeasureValue getMeasureElement() {
 		return mEl;
 	}
@@ -42,4 +47,6 @@ public class GroundTruthElement implements IElement {
 	public boolean isMatched() {
 		return match != null;
 	}
+
+	
 }

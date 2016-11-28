@@ -24,6 +24,10 @@ public class ToolElement implements IElement {
 		return textEl;
 	}
 
+	public void clearMeasures() {
+		throw new UnsupportedOperationException();
+	}
+	
 	public MeasureValue getMeasureElement() {
 		throw new UnsupportedOperationException();
 	}
