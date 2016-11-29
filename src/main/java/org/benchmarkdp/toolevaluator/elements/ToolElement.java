@@ -1,4 +1,4 @@
-package org.benchmarkdp.toolevaluator;
+package org.benchmarkdp.toolevaluator.elements;
 
 /**
  * Element to hold tool output data

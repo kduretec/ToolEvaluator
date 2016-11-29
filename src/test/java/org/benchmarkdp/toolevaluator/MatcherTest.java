@@ -2,6 +2,11 @@ package org.benchmarkdp.toolevaluator;
 
 import static org.junit.Assert.*;
 
+import org.benchmarkdp.toolevaluator.elements.DocumentElements;
+import org.benchmarkdp.toolevaluator.elements.GroundTruthElement;
+import org.benchmarkdp.toolevaluator.elements.IElement;
+import org.benchmarkdp.toolevaluator.elements.Text;
+import org.benchmarkdp.toolevaluator.elements.ToolElement;
 import org.junit.Test;
 
 public class MatcherTest {

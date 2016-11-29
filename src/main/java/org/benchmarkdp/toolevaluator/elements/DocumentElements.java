@@ -1,4 +1,4 @@
-package org.benchmarkdp.toolevaluator;
+package org.benchmarkdp.toolevaluator.elements;
 
 import java.util.ArrayList;
 import java.util.List;

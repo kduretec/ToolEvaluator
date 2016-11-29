@@ -2,6 +2,10 @@ package org.benchmarkdp.toolevaluator;
 
 import java.util.List;
 
+import org.benchmarkdp.toolevaluator.elements.DocumentElements;
+import org.benchmarkdp.toolevaluator.elements.GroundTruthElement;
+import org.benchmarkdp.toolevaluator.elements.Text;
+import org.benchmarkdp.toolevaluator.elements.ToolElement;
 import org.benchmarkdp.toolevaluator.tool.ITool;
 
 /**
@@ -13,10 +17,10 @@ import org.benchmarkdp.toolevaluator.tool.ITool;
  */
 public class Loader {
 
-	String testCaseGT = null;
+	String testCaseGT = "";
 	DocumentElements groundTruth;
 
-	String testCaseTool = null;
+	String testCaseTool = "";
 	DocumentElements toolOutput;
 
 	public Loader() {
@@ -31,25 +35,22 @@ public class Loader {
 		} else {
 			groundTruth = new DocumentElements();
 			List<Text> lT = gtTool.getTextElements(testCase);
-			for (Text t: lT) {
+			for (Text t : lT) {
 				groundTruth.addElement(new GroundTruthElement(t));
 			}
 			testCaseGT = testCase;
 		}
-		
+
 		return groundTruth;
 	}
 
 	public DocumentElements getToolOutput(String testCase, ITool tool) {
-		if (testCase.compareTo(testCaseTool) != 0) {
-			toolOutput = new DocumentElements();
-			List<Text> lT = tool.getTextElements(testCase);
-			for (Text t: lT) {
-				toolOutput.addElement(new ToolElement(t));
-			}
-			testCaseTool = testCase;
+		toolOutput = new DocumentElements();
+		List<Text> lT = tool.getTextElements(testCase);
+		for (Text t : lT) {
+			toolOutput.addElement(new ToolElement(t));
 		}
-		
+
 		return toolOutput;
 	}
 

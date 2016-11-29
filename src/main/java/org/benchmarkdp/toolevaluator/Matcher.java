@@ -1,5 +1,7 @@
 package org.benchmarkdp.toolevaluator;
 
+import org.benchmarkdp.toolevaluator.elements.DocumentElements;
+import org.benchmarkdp.toolevaluator.elements.IElement;
 import org.benchmarkdp.toolevaluator.utils.WordErrorRate;
 
 public class Matcher {

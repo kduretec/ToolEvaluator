@@ -2,7 +2,7 @@ package org.benchmarkdp.toolevaluator.tool.parser;
 
 import java.util.List;
 
-import org.benchmarkdp.toolevaluator.Text;
+import org.benchmarkdp.toolevaluator.elements.Text;
 
 /**
  * The interface for tool output parsers 

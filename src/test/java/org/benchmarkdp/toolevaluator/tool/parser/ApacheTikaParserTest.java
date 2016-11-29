@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.benchmarkdp.toolevaluator.Text;
+import org.benchmarkdp.toolevaluator.elements.Text;
 import org.junit.Test;
 
 public class ApacheTikaParserTest {

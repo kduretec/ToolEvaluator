@@ -1,4 +1,4 @@
-package org.benchmarkdp.toolevaluator;
+package org.benchmarkdp.toolevaluator.elements;
 
 import java.util.HashMap;
 import java.util.Map;
