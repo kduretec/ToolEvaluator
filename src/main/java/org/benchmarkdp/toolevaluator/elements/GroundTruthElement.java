@@ -19,7 +19,7 @@ public class GroundTruthElement implements IElement {
 	}
 
 	public GroundTruthElement(Text te) {
-		super();
+		this();
 		textEl = te;
 	}
 

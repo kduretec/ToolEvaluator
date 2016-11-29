@@ -13,16 +13,19 @@ public class SoftwareTool extends AbstractTool {
 
 	private String pathToolFolder; 
 	
+	private String pathResults;
+	
 	private IParser parser;
 
 	public SoftwareTool() {
 
 	}
 
-	public SoftwareTool(String tName, String path, IParser par) {
+	public SoftwareTool(String tName, String pathText, String resultsPath, IParser par) {
 		toolName = tName;
 		parser = par;
-		pathToolFolder = path; 
+		pathToolFolder = pathText;
+		pathResults = resultsPath;
 	}
 
 	public String getToolName() {
@@ -40,6 +43,14 @@ public class SoftwareTool extends AbstractTool {
 		}
 	
 		return lTxt;
+	}
+
+	public String getTextPath() {
+		return pathToolFolder;
+	}
+
+	public String getResultsPath() {
+		return pathResults;
 	}
 
 }

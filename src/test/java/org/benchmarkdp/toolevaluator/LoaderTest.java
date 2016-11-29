@@ -14,8 +14,8 @@ public class LoaderTest {
 	public void Test1() {
 		Loader lod = new Loader();
 
-		SoftwareTool gTool = new SoftwareTool("GroundTruth", "src/test/resources/GroundTruth", new GroundTruthParser());
-		SoftwareTool tTool = new SoftwareTool("ApacheTika", "src/test/resources/ApacheTika", new ApacheTikaParser());
+		SoftwareTool gTool = new SoftwareTool("GroundTruth", "src/test/resources/GroundTruth", null,  new GroundTruthParser());
+		SoftwareTool tTool = new SoftwareTool("ApacheTika", "src/test/resources/ApacheTika/text", null, new ApacheTikaParser());
 
 		String testCase = "testCase1";
 

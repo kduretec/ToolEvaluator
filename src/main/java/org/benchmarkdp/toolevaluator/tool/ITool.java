@@ -8,6 +8,10 @@ public interface ITool {
 
 	public String getToolName(); 
 	
+	public String getTextPath();
+	
+	public String getResultsPath();
+	
 	public List<Text> getTextElements(String testCase);
 	
 }
