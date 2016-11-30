@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<evaluationResults>
+  <tool>ApacheTika</tool>
+  <input>testCase1.pdf</input>
+  <elementResults>
+    <element>
+      <ID>12345678</ID>
+      <measures>
+        <measure name="WER_C">58</measure>
+        <measure name="WER_S">0</measure>
+        <measure name="WER_D">0</measure>
+        <measure name="WER_I">0</measure>
+      </measures>
+    </element>
+    <element>
+      <ID>678543</ID>
+      <measures>
+        <measure name="WER_C">60</measure>
+        <measure name="WER_S">0</measure>
+        <measure name="WER_D">0</measure>
+        <measure name="WER_I">0</measure>
+      </measures>
+    </element>
+  </elementResults>
+  <documentResults>
+    <measures/>
+  </documentResults>
+</evaluationResults>

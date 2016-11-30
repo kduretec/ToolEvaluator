@@ -1,5 +1,0 @@
-ID	Measure	Value
-100	WER_C	0
-100	WER_S	1
-100	WER_D	1
-100	WER_I	0

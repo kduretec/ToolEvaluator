@@ -7,10 +7,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.IElement;
+import org.benchmarkdp.toolevaluator.elements.MeasureValue;
 import org.benchmarkdp.toolevaluator.measure.IMeasure;
 import org.benchmarkdp.toolevaluator.tool.ITool;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Evaluator {
 
@@ -51,20 +65,20 @@ public class Evaluator {
 
 		String[] testNames = getNames();
 
-		for (String test : testNames) {
-			test = test.substring(0, test.lastIndexOf("."));
+		for (String testFile : testNames) {
+			String testName = testFile.substring(0, testFile.lastIndexOf("."));
 
 			for (ITool tool : tools) {
-				DocumentElements gtElements = loader.getGroundTruth(test, groundTruthTool);
-				DocumentElements toElements = loader.getToolOutput(test, tool);
+				DocumentElements gtElements = loader.getGroundTruth(testName, groundTruthTool);
+				DocumentElements toElements = loader.getToolOutput(testName, tool);
 
 				matcher.match(gtElements, toElements);
 
 				for (IMeasure measure : pMeasures) {
 					measure.measure(gtElements, toElements);
 				}
-				
-				saveMeasures(gtElements, test, tool);
+
+				saveMeasuresXML(gtElements, testName, testFile, tool);
 
 			}
 		}
@@ -76,6 +90,79 @@ public class Evaluator {
 		return names;
 	}
 
+	private void saveMeasuresXML(DocumentElements values, String testName, String testFile, ITool tool) {
+		String pathRes = tool.getResultsPath();
+		File f = new File(pathRes);
+		if (!f.exists()) {
+			f.mkdir();
+		}
+
+		try {
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+			Document doc = docBuilder.newDocument();
+			Element rootElement = doc.createElement("evaluationResults");
+			doc.appendChild(rootElement);
+			
+			Element t = doc.createElement("tool");
+			t.appendChild(doc.createTextNode(tool.getToolName()));
+			Element inpt = doc.createElement("input");
+			inpt.appendChild(doc.createTextNode(testFile));
+			rootElement.appendChild(t);
+			rootElement.appendChild(inpt);
+			Element elResult = doc.createElement("elementResults");
+			for (int i=0; i<values.getNumElements(); i++) {
+				Element el = doc.createElement("element");
+				IElement dEl = values.getElement(i);
+				Element id = doc.createElement("ID");
+				id.appendChild(doc.createTextNode(dEl.getTextElement().getID()));
+				el.appendChild(id);
+				Element m = getMeasuresAsElement(doc, dEl.getMeasureElement());
+				el.appendChild(m);
+				elResult.appendChild(el);
+			}
+			rootElement.appendChild(elResult);
+			
+			Element docResults = doc.createElement("documentResults");
+			Element m = getMeasuresAsElement(doc, values.getMeasureValue());
+			docResults.appendChild(m);
+			rootElement.appendChild(docResults);
+			
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(pathRes + "/" + testName + ".xml"));
+			
+			transformer.transform(source, result);
+
+		} catch (ParserConfigurationException pce) {
+			pce.printStackTrace();
+		} catch (TransformerConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private Element getMeasuresAsElement(Document doc, MeasureValue v)  {
+		Element measures = doc.createElement("measures");
+		
+		Map<String, Object> mValues = v.getAllMeasures();
+		for (Map.Entry<String, Object> entr : mValues.entrySet()) {
+			Element tmp = doc.createElement("measure");
+			tmp.setAttribute("name", entr.getKey());
+			tmp.appendChild(doc.createTextNode(entr.getValue().toString()));
+			measures.appendChild(tmp);
+		}
+		return measures;
+	}
+	
+	
 	private void saveMeasures(DocumentElements values, String testCase, ITool tool) {
 		String pathRes = tool.getResultsPath();
 		File f = new File(pathRes);
