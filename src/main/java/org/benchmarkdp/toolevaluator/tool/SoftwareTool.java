@@ -32,9 +32,9 @@ public class SoftwareTool extends AbstractTool {
 		return toolName;
 	}
 
-	public List<Text> getTextElements(String testCase) {
+	public List<Text> getTextElements(String testCase, String fileExstension) {
 		
-		String path = pathToolFolder + "/" + testCase + ".txt";
+		String path = pathToolFolder + "/" + testCase + "." + fileExstension;
 		File f = new File(path);
 		List<Text> lTxt = new ArrayList<Text>(); 
 		if (f.exists()) {

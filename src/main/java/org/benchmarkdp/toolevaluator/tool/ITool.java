@@ -12,6 +12,6 @@ public interface ITool {
 	
 	public String getResultsPath();
 	
-	public List<Text> getTextElements(String testCase);
+	public List<Text> getTextElements(String testCase, String fileExstension);
 	
 }

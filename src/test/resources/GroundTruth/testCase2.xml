@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<textValues>
+  <document>testCase2</document>
+  <textElements>
+    <element>
+      <ID>100</ID>
+      <text>Hello world</text>
+    </element>
+  </textElements>
+</textValues>

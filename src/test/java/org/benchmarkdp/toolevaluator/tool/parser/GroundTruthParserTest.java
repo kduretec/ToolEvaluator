@@ -13,16 +13,38 @@ public class GroundTruthParserTest {
 	public void Test1() {
 		IParser gt = new GroundTruthParser();
 
-		String testText = "ELEMENT:234567\nText:This is     a  \t huge text Another line  Third line";
+		String testText = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> "
+				+ "<textValues>"
+				+ "	<document>Test1</document>"
+				+ "	<textElements>"
+				+ "		<element>"
+				+ "			<ID>1</ID>"
+				+ "			<text>Hello world</text>"
+				+ "		</element>"
+				+ "		<element>"
+				+ "			<ID>2</ID>"
+				+ "			<text>Hello world again</text>"
+				+ "		</element>"
+				+ "	</textElements>"
+				+ "</textValues>";
 		List<Text> elements = gt.parse(testText);
-		assertTrue(elements.size() == 1);
+		assertTrue(elements.size() == 2);
 	}
 
 	@Test
 	public void Test2() {
 		IParser gt = new GroundTruthParser();
 
-		String testText = "ELEMENT:234567\nText:This is     a  \t huge text Another line  Third line\n\n";
+		String testText = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?> "
+				+ "<textValues>"
+				+ "	<document>Test2</document>"
+				+ "	<textElements>"
+				+ "		<element>"
+				+ "			<ID>234567</ID>"
+				+ "			<text>This is a huge text \t      Another line Third line \n\n   </text>"
+				+ "		</element>"
+				+ "	</textElements>"
+				+ "</textValues>";
 		List<Text> elements = gt.parse(testText);
 		assertTrue(elements.size() == 1);
 		Text elT = elements.get(0);

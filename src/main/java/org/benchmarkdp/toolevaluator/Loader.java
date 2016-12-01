@@ -34,7 +34,7 @@ public class Loader {
 			}
 		} else {
 			groundTruth = new DocumentElements();
-			List<Text> lT = gtTool.getTextElements(testCase);
+			List<Text> lT = gtTool.getTextElements(testCase, "xml");
 			for (Text t : lT) {
 				groundTruth.addElement(new GroundTruthElement(t));
 			}
@@ -46,7 +46,7 @@ public class Loader {
 
 	public DocumentElements getToolOutput(String testCase, ITool tool) {
 		toolOutput = new DocumentElements();
-		List<Text> lT = tool.getTextElements(testCase);
+		List<Text> lT = tool.getTextElements(testCase, "txt");
 		for (Text t : lT) {
 			toolOutput.addElement(new ToolElement(t));
 		}
