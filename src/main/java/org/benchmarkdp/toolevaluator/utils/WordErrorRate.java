@@ -21,6 +21,8 @@ public class WordErrorRate {
 	private int insertion;
 
 	private int correct;
+	
+	private int numberOfWords;
 
 	private int totalOp;
 
@@ -110,6 +112,7 @@ public class WordErrorRate {
 		substitution = mat[m - 1][n - 1].substitution;
 		insertion = mat[m - 1][n - 1].insertion;
 		correct = mat[m - 1][n - 1].correct;
+		numberOfWords = rWords.length;
 
 	}
 
@@ -131,5 +134,9 @@ public class WordErrorRate {
 
 	public int getCorrect() {
 		return correct;
+	}
+	
+	public int getNumberOfWords() {
+		return numberOfWords;
 	}
 }

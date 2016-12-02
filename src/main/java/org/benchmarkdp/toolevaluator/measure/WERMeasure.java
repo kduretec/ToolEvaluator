@@ -29,6 +29,7 @@ public class WERMeasure implements IMeasure {
 			tmpMeasures.put("WER_D", new Integer(wer.getDeletion()));
 			tmpMeasures.put("WER_I", new Integer(wer.getInsertion()));
 			tmpMeasures.put("WER_S", new Integer(wer.getSubstitution()));
+			tmpMeasures.put("WER_N", new Integer(wer.getNumberOfWords()));
 			gtEl.getMeasureElement().addMeasureValue(tmpMeasures);
 
 		}

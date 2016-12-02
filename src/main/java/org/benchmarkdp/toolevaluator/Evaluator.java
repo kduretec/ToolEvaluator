@@ -66,6 +66,7 @@ public class Evaluator {
 		String[] testNames = getNames();
 
 		for (String testFile : testNames) {
+			System.out.println("Processing file " + testFile);
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
 
 			for (ITool tool : tools) {
@@ -108,7 +109,7 @@ public class Evaluator {
 			Element t = doc.createElement("tool");
 			t.appendChild(doc.createTextNode(tool.getToolName()));
 			Element inpt = doc.createElement("input");
-			inpt.appendChild(doc.createTextNode(testFile));
+			inpt.appendChild(doc.createTextNode(testName));
 			rootElement.appendChild(t);
 			rootElement.appendChild(inpt);
 			Element elResult = doc.createElement("elementResults");
