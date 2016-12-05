@@ -18,7 +18,7 @@ public class PercCorMeasure implements IMeasure {
 		}
 
 		double perc = (double) correct / total;
-		gt.getMeasureValue().addMeasureValue("percCorrect", new Double(perc));
+		gt.addMeasure("percCorrect", new Double(perc));
 
 	}
 

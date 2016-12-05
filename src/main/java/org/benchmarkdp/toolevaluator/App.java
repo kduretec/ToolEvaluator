@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.benchmarkdp.toolevaluator.measure.IMeasure;
+import org.benchmarkdp.toolevaluator.measure.OrderMeasure;
 import org.benchmarkdp.toolevaluator.measure.PercCorMeasure;
 import org.benchmarkdp.toolevaluator.measure.WERMeasure;
 import org.benchmarkdp.toolevaluator.tool.ITool;
@@ -43,6 +44,7 @@ public class App {
 		List<IMeasure> measures = new ArrayList<IMeasure>();
 		measures.add(new WERMeasure());
 		measures.add(new PercCorMeasure());
+		measures.add(new OrderMeasure());
 		evaluator.setMeasures(measures);
 	}
 
@@ -58,9 +60,12 @@ public class App {
 				toolOutput + "/ApacheTika1_2/results", new ApacheTikaParser());
 		ITool tika113 = new SoftwareTool("ApacheTika_113", toolOutput + "/ApacheTika1_13/text",
 				toolOutput + "/ApacheTika1_13/results", new ApacheTikaParser());
+		ITool textUtil = new SoftwareTool("TextUtil", toolOutput + "/TextUtil/text",
+				toolOutput + "/TextUtil/results", new ApacheTikaParser());
 		tools.add(tika11);
 		tools.add(tika12);
 		tools.add(tika113);
+		tools.add(textUtil);
 		evaluator.setTools(tools);
 	}
 }
