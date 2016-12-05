@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <evaluationResults>
   <tool>ApacheTika</tool>
-  <input>testCase2.docx</input>
+  <input>testCase2</input>
   <elementResults>
     <element>
       <ID>100</ID>
       <measures>
+        <measure name="WER_N">2</measure>
         <measure name="WER_C">0</measure>
         <measure name="WER_S">1</measure>
         <measure name="WER_D">1</measure>
