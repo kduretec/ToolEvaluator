@@ -19,6 +19,13 @@ public class Matcher {
 					WordErrorRate wer = new WordErrorRate(gE.getTextElement().getText(), tE.getTextElement().getText());
 					wer.evaluate();
 					int correct = wer.getCorrect();
+					int num = wer.getNumberOfWords();
+					double perc = (double) correct / num;
+					if (perc > 0.9) {
+						bestCorr = correct;
+						bestMatch = tE;
+						break;
+					}
 					if (correct > bestCorr) {
 						bestCorr = correct;
 						bestMatch = tE;
@@ -29,7 +36,7 @@ public class Matcher {
 			if (bestMatch != null) {
 				gE.setMatch(bestMatch);
 				bestMatch.setMatch(gE);
-				
+
 			}
 
 		}
