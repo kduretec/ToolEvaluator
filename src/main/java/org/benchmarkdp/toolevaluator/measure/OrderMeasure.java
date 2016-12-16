@@ -11,7 +11,10 @@ public class OrderMeasure implements IMeasure {
 		String tS = getToolIDs(tool);
 		WordErrorRate wer = new WordErrorRate(gS, tS);
 		wer.evaluate();
-		gt.addMeasure("ORDER_C", new Integer(wer.getCorrect()));
+		int c = wer.getCorrect();
+		int n = wer.getNumberOfWords();
+		double res = (double)c/(double)n;
+		gt.addMeasure("percOfOrder", new Double(res));
 	}
 
 	private String getGroundTruthIDs(DocumentElements d) {

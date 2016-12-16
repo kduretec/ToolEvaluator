@@ -113,7 +113,6 @@ public class WordErrorRate {
 		insertion = mat[m - 1][n - 1].insertion;
 		correct = mat[m - 1][n - 1].correct;
 		numberOfWords = rWords.length;
-
 	}
 
 	public int getTotalOp() {

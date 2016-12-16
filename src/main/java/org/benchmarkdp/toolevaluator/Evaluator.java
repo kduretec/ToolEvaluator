@@ -41,8 +41,8 @@ public class Evaluator {
 	private Loader loader;
 
 	private Matcher matcher;
-	
-	private IOutputWriter output; 
+
+	private IOutputWriter output;
 
 	public Evaluator() {
 		loader = new Loader();
