@@ -7,7 +7,7 @@ import org.benchmarkdp.toolevaluator.elements.Text;
 
 public class TextUtilParser extends AbstractParser {
 
-	public List<Text> parse(String text) {
+	public List<Text> parse(String text, String format) {
 
 		List<Text> elements = new ArrayList<Text>();
 		StringBuilder sb = new StringBuilder();

@@ -11,6 +11,6 @@ import org.benchmarkdp.toolevaluator.elements.Text;
  */
 public interface IParser {
 
-	public List<Text> parse(String text);
+	public List<Text> parse(String text, String format);
 	
 }

@@ -39,7 +39,7 @@ public class SoftwareTool extends AbstractTool {
 		List<Text> lTxt = new ArrayList<Text>(); 
 		if (f.exists()) {
 			String s = readFileToString(f);
-			lTxt = parser.parse(s);
+			lTxt = parser.parse(s, fileExstension);
 		}
 	
 		return lTxt;

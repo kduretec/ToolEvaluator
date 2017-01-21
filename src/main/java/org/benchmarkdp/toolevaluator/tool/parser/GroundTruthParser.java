@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 
 public class GroundTruthParser extends AbstractParser {
 
-	public List<Text> parse(String text) {
+	public List<Text> parse(String text, String format) {
 
 		List<Text> elements = new ArrayList<Text>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

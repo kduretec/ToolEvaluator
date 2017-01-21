@@ -14,7 +14,7 @@ public class ApacheTikaParserTest {
 		IParser tika = new ApacheTikaParser();
 
 		String testText = "This is     a  \t huge text \n Another line       \n Third line";
-		List<Text> elements = tika.parse(testText);
+		List<Text> elements = tika.parse(testText, "xml");
 		assertTrue(elements.size() == 3);
 	}
 
@@ -23,7 +23,7 @@ public class ApacheTikaParserTest {
 		IParser tika = new ApacheTikaParser();
 
 		String testText = "This is     a  \t huge text \n Another line       \n Third line\n\n";
-		List<Text> elements = tika.parse(testText);
+		List<Text> elements = tika.parse(testText, "xml");
 		assertTrue(elements.size() == 3);
 		Text elT = elements.get(0);
 		assertTrue(elT.getText().compareTo("This is a huge text") == 0);
