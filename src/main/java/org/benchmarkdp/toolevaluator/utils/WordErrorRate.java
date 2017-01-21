@@ -57,8 +57,8 @@ public class WordErrorRate {
 	private MatEl[][] mat;
 
 	public WordErrorRate(String ref, String n) {
-		reference = ref;
-		newString = n;
+		reference = ref.trim();
+		newString = n.trim();
 	}
 
 	public void evaluate() {

@@ -39,9 +39,21 @@ public class GroundTruthParser extends AbstractParser {
 					Element tmp = (Element) nodes.item(i);
 					Node id = tmp.getElementsByTagName("ID").item(0);
 					Node txt = tmp.getElementsByTagName("text").item(0);
+					Node lNode = tmp.getElementsByTagName("lines").item(0);
+					List<String> lines = new ArrayList<String>();
+					if (lNode != null) {
+						NodeList lN = lNode.getChildNodes();
+						for (int j = 0; j < lN.getLength(); j++) {
+							Node n = lN.item(j);
+							if (n.getNodeType() == Node.ELEMENT_NODE) {
+								lines.add(n.getTextContent());
+							}
+						}
+					}
 					Text txtEl = new Text();
 					txtEl.setID(id.getTextContent());
 					txtEl.setText(removeAllFormating(txt.getTextContent()));
+					txtEl.setLines(lines);
 					elements.add(txtEl);
 				}
 			}
