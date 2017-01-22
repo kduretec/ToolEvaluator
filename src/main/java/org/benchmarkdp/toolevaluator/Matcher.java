@@ -57,6 +57,26 @@ public class Matcher {
 			}
 		}
 
+		// third stage of matching 
+		// trying to match words to elements
+		for (int i = 0; i < groundTruth.getNumElements(); i++) {
+			IElement gE = groundTruth.getElement(i);
+			if (!gE.isMatched()) {
+				String[] words = gE.getTextElement().getText().split(" ");
+
+				for (int j = 0; j < toolOutput.getNumElements(); j++) {
+					if (!toolOutput.getElement(j).isMatched()) {
+						IElement matched = matchWordsToElements(words, toolOutput, j);
+						if (matched != null) {
+							gE.setMatch(matched);
+							matched.setMatch(gE);
+							break;
+						}
+					}
+				}
+			}
+		}
+		
 	}
 
 	private boolean isMatch(String s1, String s2) {
@@ -80,6 +100,25 @@ public class Matcher {
 			}
 			IElement tmp = elements.getElement(endPos);
 			if (isMatch(lines.get(i), tmp.getTextElement().getText())) {
+				endPos = endPos + 1;
+			} else {
+				return null;
+			}
+		}
+		
+		IElement merged = elements.mergeElements(startPos, endPos);
+		return merged;
+	}
+	
+	private IElement matchWordsToElements(String[] words , DocumentElements elements, int startPos) {
+		
+		int endPos = startPos;
+		for (int i = 0; i < words.length; i++) {
+			if (endPos >= elements.getNumElements()) {
+				return null;
+			}
+			IElement tmp = elements.getElement(endPos);
+			if (isMatch(words[i], tmp.getTextElement().getText())) {
 				endPos = endPos + 1;
 			} else {
 				return null;
