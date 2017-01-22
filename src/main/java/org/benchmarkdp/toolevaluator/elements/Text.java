@@ -30,6 +30,7 @@ public class Text {
 	
 	public void setText(String t) {
 		text = t;
+		nWords =  text.split(" ").length;
 	}
 	
 	public void setID(String id) {
@@ -46,6 +47,10 @@ public class Text {
 	
 	public void setLines(List<String> l) {
 		lines = l;
+	}
+	
+	public int getNumberWords() {
+		return nWords;
 	}
 	
 }

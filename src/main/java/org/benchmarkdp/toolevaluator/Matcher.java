@@ -16,19 +16,24 @@ public class Matcher {
 			for (int j = 0; j < toolOutput.getNumElements(); j++) {
 				IElement tE = toolOutput.getElement(j);
 				if (!tE.isMatched()) {
-					WordErrorRate wer = new WordErrorRate(gE.getTextElement().getText(), tE.getTextElement().getText());
-					wer.evaluate();
-					int correct = wer.getCorrect();
-					int num = wer.getNumberOfWords();
-					double perc = (double) correct / num;
-					if (perc > 0.9) {
-						bestCorr = correct;
-						bestMatch = tE;
-						break;
-					}
-					if (correct > bestCorr) {
-						bestCorr = correct;
-						bestMatch = tE;
+					int gnw = gE.getTextElement().getNumberWords();
+					int tnw = tE.getTextElement().getNumberWords();
+					if (Math.abs((double) gnw - tnw) / gnw <= 0.1) {
+						WordErrorRate wer = new WordErrorRate(gE.getTextElement().getText(),
+								tE.getTextElement().getText());
+						wer.evaluate();
+						int correct = wer.getCorrect();
+						int num = wer.getNumberOfWords();
+						double perc = (double) correct / num;
+						if (perc >= 0.9) {
+							bestCorr = correct;
+							bestMatch = tE;
+							break;
+						}
+						if (correct > bestCorr) {
+							bestCorr = correct;
+							bestMatch = tE;
+						}
 					}
 				}
 			}
