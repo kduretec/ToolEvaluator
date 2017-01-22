@@ -71,8 +71,10 @@ public class DocumentElements {
 		newEl.getTextElement().setLines(newLines);
 
 		elements.set(startPos, newEl);
-		for (int i = startPos + 1; i <= endPos; i++) {
-			elements.remove(i);
+		int removInd = startPos + 1;
+		for (int i = removInd; i <= endPos; i++) {
+			elements.remove(removInd);
+			
 		}
 
 		return newEl;

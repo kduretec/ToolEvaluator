@@ -14,7 +14,6 @@ public class Matcher {
 		// try to match elements to elements
 		for (int i = 0; i < groundTruth.getNumElements(); i++) {
 			IElement gE = groundTruth.getElement(i);
-
 			IElement bestMatch = null;
 			for (int j = 0; j < toolOutput.getNumElements(); j++) {
 				IElement tE = toolOutput.getElement(j);
@@ -63,7 +62,6 @@ public class Matcher {
 			IElement gE = groundTruth.getElement(i);
 			if (!gE.isMatched()) {
 				String[] words = gE.getTextElement().getText().split(" ");
-
 				for (int j = 0; j < toolOutput.getNumElements(); j++) {
 					if (!toolOutput.getElement(j).isMatched()) {
 						IElement matched = matchWordsToElements(words, toolOutput, j);
@@ -106,12 +104,11 @@ public class Matcher {
 			}
 		}
 		
-		IElement merged = elements.mergeElements(startPos, endPos);
+		IElement merged = elements.mergeElements(startPos, endPos-1);
 		return merged;
 	}
 	
 	private IElement matchWordsToElements(String[] words , DocumentElements elements, int startPos) {
-		
 		int endPos = startPos;
 		for (int i = 0; i < words.length; i++) {
 			if (endPos >= elements.getNumElements()) {
@@ -125,7 +122,7 @@ public class Matcher {
 			}
 		}
 		
-		IElement merged = elements.mergeElements(startPos, endPos);
+		IElement merged = elements.mergeElements(startPos, endPos-1);
 		return merged;
 	}
 
