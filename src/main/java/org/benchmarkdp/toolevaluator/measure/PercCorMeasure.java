@@ -9,8 +9,12 @@ public class PercCorMeasure implements IMeasure {
 
 		int correct = 0;
 		int total = 0;
+		int totalMatched = 0;
 		for (int i = 0; i < gt.getNumElements(); i++) {
 			IElement el = gt.getElement(i);
+			if (el.isMatched()) {
+				totalMatched++;
+			}
 			Integer c = (Integer) el.getMeasureElement().getMeasureValue("WER_C");
 			Integer n = (Integer) el.getMeasureElement().getMeasureValue("WER_N");
 			correct += c.intValue();
@@ -18,7 +22,9 @@ public class PercCorMeasure implements IMeasure {
 		}
 
 		double perc = (double) correct / total;
+		double percMatched = (double) totalMatched / gt.getNumElements();
 		gt.addMeasure("percCorrect", new Double(perc));
+		gt.addMeasure("percMatched", new Double(percMatched));
 
 	}
 

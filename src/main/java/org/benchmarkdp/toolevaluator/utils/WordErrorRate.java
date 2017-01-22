@@ -57,8 +57,8 @@ public class WordErrorRate {
 	private MatEl[][] mat;
 
 	public WordErrorRate(String ref, String n) {
-		reference = ref.trim();
-		newString = n.trim();
+		reference = removeAllFormating(ref);
+		newString = removeAllFormating(n);
 	}
 
 	public void evaluate() {
@@ -137,5 +137,15 @@ public class WordErrorRate {
 	
 	public int getNumberOfWords() {
 		return numberOfWords;
+	}
+	
+	private String removeAllFormating(String input) {
+
+		String output = input.replaceAll("\\s+", " ").trim();
+		output = output.replaceAll("(\\r|\\n|\\r\\n|\\t)+", " ");
+		output = output.replaceAll("\\s+", " ").trim();
+
+		return output;
+
 	}
 }
