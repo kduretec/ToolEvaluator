@@ -9,8 +9,8 @@ public class DocumentElements {
 	private String source;
 
 	private List<IElement> elements;
-	
-	private MeasureValue documentMeasures; 
+
+	private MeasureValue documentMeasures;
 
 	public DocumentElements() {
 		elements = new ArrayList<IElement>();
@@ -40,16 +40,41 @@ public class DocumentElements {
 	public IElement getElement(int i) {
 		return elements.get(i);
 	}
-	
+
 	public void addMeasure(String name, Object value) {
 		documentMeasures.addMeasureValue(name, value);
 	}
-	
+
 	public void addMeasure(Map<String, Object> measures) {
 		documentMeasures.addMeasureValue(measures);
 	}
-	
+
 	public MeasureValue getMeasureValue() {
 		return documentMeasures;
+	}
+
+	public IElement mergeElements(int startPos, int endPos) {
+		if (endPos >= elements.size()) {
+			endPos = elements.size() - 1;
+		}
+		IElement newEl = new ToolElement();
+		StringBuilder newText = new StringBuilder();
+		List<String> newLines = new ArrayList<String>();
+		for (int i = startPos; i <= endPos; i++) {
+			IElement tmp = elements.get(i);
+			String txtTmp = tmp.getTextElement().getText();
+			newText.append(" ");
+			newText.append(txtTmp);
+			newLines.add(txtTmp);
+		}
+		newEl.getTextElement().setText(newText.toString().trim());
+		newEl.getTextElement().setLines(newLines);
+
+		elements.set(startPos, newEl);
+		for (int i = startPos + 1; i <= endPos; i++) {
+			elements.remove(i);
+		}
+
+		return newEl;
 	}
 }
