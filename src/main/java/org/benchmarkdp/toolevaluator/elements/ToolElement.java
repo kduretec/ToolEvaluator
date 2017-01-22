@@ -13,7 +13,7 @@ public class ToolElement implements IElement {
 	private IElement match = null;
 
 	public ToolElement() {
-
+		textEl = new Text();
 	}
 
 	public ToolElement(Text te) {
