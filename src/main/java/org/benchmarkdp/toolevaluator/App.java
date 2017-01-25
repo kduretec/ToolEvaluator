@@ -12,6 +12,7 @@ import org.benchmarkdp.toolevaluator.tool.ITool;
 import org.benchmarkdp.toolevaluator.tool.SoftwareTool;
 import org.benchmarkdp.toolevaluator.tool.parser.ApacheTikaParser;
 import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
+import org.benchmarkdp.toolevaluator.tool.parser.XPdfParser;
 
 /**
  * Hello world!
@@ -58,25 +59,33 @@ public class App {
 		List<ITool> tools = new ArrayList<ITool>();
 		ITool tika11 = new SoftwareTool("ApacheTika_11", toolOutput + "/ApacheTika1_1/text",
 				toolOutput + "/ApacheTika1_1/results", new ApacheTikaParser());
-//		ITool tika12 = new SoftwareTool("ApacheTika_12", toolOutput + "/ApacheTika1_2/text",
-//				toolOutput + "/ApacheTika1_2/results", new ApacheTikaParser());
-//		ITool tika113 = new SoftwareTool("ApacheTika_113", toolOutput + "/ApacheTika1_13/text",
-//				toolOutput + "/ApacheTika1_13/results", new ApacheTikaParser());
-//		ITool textUtil = new SoftwareTool("TextUtil", toolOutput + "/TextUtil/text", toolOutput + "/TextUtil/results",
-//				new ApacheTikaParser());
-//		ITool docToText = new SoftwareTool("DocToText", toolOutput + "/DocToText/text",
-//				toolOutput + "/DocToText/results", new DocToTextParser());
-//		ITool abiWord = new SoftwareTool("AbiWord", toolOutput + "/AbiWord/text", toolOutput + "/AbiWord/results",
-//				new AbiWordParser());
-//		ITool libreOffice = new SoftwareTool("LibreOffice", toolOutput + "/LibreOffice/text", toolOutput + "/LibreOffice/results",
-//				new LibreOfficeParser());
+		// ITool tika12 = new SoftwareTool("ApacheTika_12", toolOutput +
+		// "/ApacheTika1_2/text",
+		// toolOutput + "/ApacheTika1_2/results", new ApacheTikaParser());
+		// ITool tika113 = new SoftwareTool("ApacheTika_113", toolOutput +
+		// "/ApacheTika1_13/text",
+		// toolOutput + "/ApacheTika1_13/results", new ApacheTikaParser());
+		// ITool textUtil = new SoftwareTool("TextUtil", toolOutput +
+		// "/TextUtil/text", toolOutput + "/TextUtil/results",
+		// new ApacheTikaParser());
+		// ITool docToText = new SoftwareTool("DocToText", toolOutput +
+		// "/DocToText/text",
+		// toolOutput + "/DocToText/results", new DocToTextParser());
+		// ITool abiWord = new SoftwareTool("AbiWord", toolOutput +
+		// "/AbiWord/text", toolOutput + "/AbiWord/results",
+		// new AbiWordParser());
+		// ITool libreOffice = new SoftwareTool("LibreOffice", toolOutput +
+		// "/LibreOffice/text", toolOutput + "/LibreOffice/results",
+		// new LibreOfficeParser());
+		ITool xpdf = new SoftwareTool("Xpdf", toolOutput + "/Xpdf/text", toolOutput + "/Xpdf/results",
+				new XPdfParser());
 		tools.add(tika11);
-//		tools.add(tika12);
-//		tools.add(tika113);
-//		tools.add(textUtil);
-//		tools.add(docToText);
-//		tools.add(abiWord);
-//		tools.add(libreOffice);
+		// tools.add(tika12);
+		// tools.add(tika113);
+		// tools.add(textUtil);
+		// tools.add(docToText);
+		// tools.add(abiWord);
+		// tools.add(libreOffice);
 		evaluator.setTools(tools);
 	}
 }
