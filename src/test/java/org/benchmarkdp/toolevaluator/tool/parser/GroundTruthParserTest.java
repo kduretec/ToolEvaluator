@@ -36,7 +36,7 @@ public class GroundTruthParserTest {
 				+ "		</element>"
 				+ "	</textElements>"
 				+ "</textValues>";
-		List<Text> elements = gt.parse(testText, "xml");
+		List<Text> elements = gt.parseToTextElements(testText, "xml");
 		assertTrue(elements.size() == 2);
 		assertTrue(elements.get(1).getLines().size()==3);
 	}
@@ -60,7 +60,7 @@ public class GroundTruthParserTest {
 				+ "		</element>"
 				+ "	</textElements>"
 				+ "</textValues>";
-		List<Text> elements = gt.parse(testText, "xml");
+		List<Text> elements = gt.parseToTextElements(testText, "xml");
 		assertTrue(elements.size() == 1);
 		assertTrue(elements.get(0).getLines().size()==3);
 		Text elT = elements.get(0);

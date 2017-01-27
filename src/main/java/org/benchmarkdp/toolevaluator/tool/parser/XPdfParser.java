@@ -7,7 +7,7 @@ import org.benchmarkdp.toolevaluator.elements.Text;
 
 public class XPdfParser extends AbstractParser {
 
-	public List<Text> parse(String text, String format) {
+	public List<Text> parseToTextElements(String text, String format) {
 
 		List<Text> elements = new ArrayList<Text>();
 		List<String> lines = new ArrayList<String>();

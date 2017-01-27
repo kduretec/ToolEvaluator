@@ -7,7 +7,7 @@ import org.benchmarkdp.toolevaluator.elements.Text;
 
 public class ApacheTikaParser extends AbstractParser {
 
-	public List<Text> parse(String text, String format) {
+	public List<Text> parseToTextElements(String text, String format) {
 
 		List<Text> elements = new ArrayList<Text>();
 		StringBuilder sb = new StringBuilder();
