@@ -118,8 +118,8 @@ public class WordErrorRate {
 						mat[i][j].correct += subCost > 0 ? 0 : 1;
 					}
 				}
-				mat[i][j].bestSubs = getMin(mat[i - 1][j].bestSubs + mat[i][0].totalOp,
-						mat[i - 1][j - 1].bestSubs + mat[i][j].totalOp, mat[i][j - 1].bestSubs + mat[0][j].totalOp);
+				mat[i][j].bestSubs = getMin(mat[i - 1][j].bestSubs + mat[i][1].totalOp,
+						mat[i - 1][j - 1].bestSubs + mat[i][j].totalOp, mat[i][j - 1].bestSubs + mat[1][j].totalOp);
 
 				if (i == m - 1) {
 					if (mat[i][j].bestSubs < minBestSubs) {
@@ -133,6 +133,11 @@ public class WordErrorRate {
 		endPos = minBestSubsPos;
 		startPos = retrieveStartPos(m - 1, endPos);
 
+		// updating to match exact string positions as additional 
+		// row and column are added
+		startPos = startPos -1;
+		endPos = endPos -1;
+		
 		totalOp = mat[m - 1][n - 1].totalOp;
 		deletion = mat[m - 1][n - 1].deletion;
 		substitution = mat[m - 1][n - 1].substitution;
@@ -165,6 +170,14 @@ public class WordErrorRate {
 		return numberOfWords;
 	}
 
+	public int getStartPos() {
+		return startPos;
+	}
+	
+	public int getEndPos() {
+		return endPos;
+	}
+	
 	private String removeAllFormating(String input) {
 
 		String output = input.replaceAll("\\s+", " ").trim();
@@ -197,7 +210,7 @@ public class WordErrorRate {
 		}
 		if (mat[i][j].bestSubs == mat[i - 1][j - 1].bestSubs + mat[i][j].totalOp) {
 			return retrieveStartPos(i - 1, j - 1);
-		} else if (mat[i][j].bestSubs == mat[i - 1][j].bestSubs + mat[i][0].totalOp) {
+		} else if (mat[i][j].bestSubs == mat[i - 1][j].bestSubs + mat[i][1].totalOp) {
 			return retrieveStartPos(i - 1, j);
 		} else {
 			return retrieveStartPos(i, j - 1);
