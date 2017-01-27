@@ -3,7 +3,10 @@ package org.benchmarkdp.toolevaluator.tool.parser;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,8 +26,13 @@ import org.xml.sax.SAXException;
 
 public class GroundTruthParser extends AbstractParser {
 
+	private List<String> allWords;
+		
 	public List<Text> parseToTextElements(String text, String format) {
 
+		allWords = new ArrayList<String>();
+		wordHistogram = new HashMap<String, Integer>();
+		
 		List<Text> elements = new ArrayList<Text>();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
@@ -52,7 +60,11 @@ public class GroundTruthParser extends AbstractParser {
 					}
 					Text txtEl = new Text();
 					txtEl.setID(id.getTextContent());
-					txtEl.setText(removeAllFormating(txt.getTextContent()));
+					String maintext = removeAllFormating(txt.getTextContent());
+					String[] wordsEl = maintext.split(" ");
+					addTextToHist(wordsEl);
+					allWords.addAll(Arrays.asList(wordsEl));
+					txtEl.setText(maintext);
 					txtEl.setLines(lines);
 					elements.add(txtEl);
 				}
@@ -73,6 +85,21 @@ public class GroundTruthParser extends AbstractParser {
 		}
 
 		return elements;
+	}
+	
+	public Map<String, Integer> getWordHistogram() {
+		return wordHistogram;
+	}
+
+	public String[] getAllWords() {
+		String tmp[] = new String[allWords.size()];
+		return allWords.toArray(tmp);
+	}
+	
+	private void addTextToHist(String[] words) {
+		for (String w : words) {
+			addWordToHistogram(w);
+		}
 	}
 
 }

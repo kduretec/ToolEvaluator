@@ -68,5 +68,7 @@ public class GroundTruthParserTest {
 		assertTrue(ID.compareTo("234567") == 0);
 		assertTrue(elT.getText().compareTo("This is a huge text Another line Third line") == 0);
 		assertTrue(elT.getLines().get(1).compareTo("Another line Third line ") == 0);
+		
+		assertTrue(gt.getWordHistogram().get("Third").intValue() == 1);
 	}
 }
