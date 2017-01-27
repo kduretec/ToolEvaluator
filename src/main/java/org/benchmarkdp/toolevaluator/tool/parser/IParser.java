@@ -22,4 +22,6 @@ public interface IParser {
 	
 	public String[] getAllWords(); 
 	
+	public Integer[] getWordsPositions();
+	
 }

@@ -7,6 +7,8 @@ import org.benchmarkdp.toolevaluator.elements.Text;
 
 public abstract class AbstractParser implements IParser{
 
+	protected Map<String, Integer> wordHistogram;
+	
 	protected String removeAllFormating(String input) {
 
 		String output = input.replaceAll("\\s+", " ").trim();
@@ -35,5 +37,18 @@ public abstract class AbstractParser implements IParser{
 	
 	public String[] getAllWords() {
 		throw new UnsupportedOperationException();
+	}
+	
+	public Integer[] getWordsPositions() {
+		throw new UnsupportedOperationException();
+	}
+	
+	protected void addWordToHistogram(String word) {
+		if (!wordHistogram.containsKey(word)) {
+			wordHistogram.put(word, new Integer(1));
+		} else {
+			Integer i = wordHistogram.get(word);
+			wordHistogram.put(word, new Integer(i.intValue() + 1));
+		}
 	}
 }
