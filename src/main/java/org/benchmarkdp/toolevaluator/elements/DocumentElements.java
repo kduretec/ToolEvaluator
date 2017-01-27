@@ -16,7 +16,6 @@ public class DocumentElements {
 	
 	private List<IElement> elements = null;
 	
-
 	private MeasureValue documentMeasures;
 
 	public DocumentElements() {
