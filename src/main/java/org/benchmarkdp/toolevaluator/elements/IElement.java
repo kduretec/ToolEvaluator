@@ -14,4 +14,16 @@ public interface IElement {
 	
 	public boolean isMatched();
 	
+	public void setMatchWordPosition(int start, int end);
+	
+	public int getStartWordPosition();
+	
+	public int getEndWordPosition();
+	
+	public void setMatchLinePosition(int start, int end);
+	
+	public int getStartLinePosition();
+	
+	public int getEndLinePosition();
+	
 }

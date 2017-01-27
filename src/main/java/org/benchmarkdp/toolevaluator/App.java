@@ -86,6 +86,7 @@ public class App {
 		// tools.add(docToText);
 		// tools.add(abiWord);
 		// tools.add(libreOffice);
+		tools.add(xpdf);
 		evaluator.setTools(tools);
 	}
 }

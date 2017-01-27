@@ -10,6 +10,7 @@ public class XPdfParser extends AbstractParser {
 	public List<Text> parse(String text, String format) {
 
 		List<Text> elements = new ArrayList<Text>();
+		List<String> lines = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < text.length(); i++) {
 			if (text.charAt(i) != '\n') {

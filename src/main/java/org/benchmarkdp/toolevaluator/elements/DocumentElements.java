@@ -8,7 +8,14 @@ public class DocumentElements {
 
 	private String source;
 
-	private List<IElement> elements;
+	private String[] allText = null;
+	
+	private List<String> lines = null;
+	
+	private Map<String, Integer> wordHistogram;
+	
+	private List<IElement> elements = null;
+	
 
 	private MeasureValue documentMeasures;
 
@@ -51,6 +58,30 @@ public class DocumentElements {
 
 	public MeasureValue getMeasureValue() {
 		return documentMeasures;
+	}
+	
+	public String[] getAllText() {
+		return allText;
+	}
+
+	public void setAllText(String[] allText) {
+		this.allText = allText;
+	}
+
+	public List<String> getLines() {
+		return lines;
+	}
+
+	public void setLines(List<String> lines) {
+		this.lines = lines;
+	}
+
+	public Map<String, Integer> getWordHistogram() {
+		return wordHistogram;
+	}
+
+	public void setWordHistogram(Map<String, Integer> wordHistogram) {
+		this.wordHistogram = wordHistogram;
 	}
 
 	public IElement mergeElements(int startPos, int endPos) {
