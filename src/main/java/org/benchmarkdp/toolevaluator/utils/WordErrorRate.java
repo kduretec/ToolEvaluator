@@ -80,7 +80,7 @@ public class WordErrorRate {
 		int totalI = 0;
 		for (int i = 0; i < m; i++) {
 			totalI = totalI + i;
-			mat[i][0] = new MatEl(i, i, 0, 0, 0, totalI);
+			mat[i][0] = new MatEl(i, i, 0, 0, 0, i);
 		}
 
 		for (int j = 0; j < n; j++) {
@@ -118,8 +118,9 @@ public class WordErrorRate {
 						mat[i][j].correct += subCost > 0 ? 0 : 1;
 					}
 				}
-				mat[i][j].bestSubs = getMin(mat[i - 1][j].bestSubs + mat[i][1].totalOp,
-						mat[i - 1][j - 1].bestSubs + mat[i][j].totalOp, mat[i][j - 1].bestSubs + mat[1][j].totalOp);
+
+				mat[i][j].bestSubs = getMin(mat[i - 1][j].bestSubs + 1, mat[i - 1][j - 1].bestSubs + subCost,
+						mat[i][j - 1].bestSubs + 1);
 
 				if (i == m - 1) {
 					if (mat[i][j].bestSubs < minBestSubs) {
@@ -133,11 +134,11 @@ public class WordErrorRate {
 		endPos = minBestSubsPos;
 		startPos = retrieveStartPos(m - 1, endPos);
 
-		// updating to match exact string positions as additional 
+		// updating to match exact string positions as additional
 		// row and column are added
-		startPos = startPos -1;
-		endPos = endPos -1;
-		
+		startPos = startPos - 1;
+		endPos = endPos - 1;
+
 		totalOp = mat[m - 1][n - 1].totalOp;
 		deletion = mat[m - 1][n - 1].deletion;
 		substitution = mat[m - 1][n - 1].substitution;
@@ -173,11 +174,11 @@ public class WordErrorRate {
 	public int getStartPos() {
 		return startPos;
 	}
-	
+
 	public int getEndPos() {
 		return endPos;
 	}
-	
+
 	private String removeAllFormating(String input) {
 
 		String output = input.replaceAll("\\s+", " ").trim();
@@ -205,15 +206,29 @@ public class WordErrorRate {
 	}
 
 	private int retrieveStartPos(int i, int j) {
+		// System.out.println("i=" +i + " j="+j);
 		if (i == 0) {
 			return j + 1;
 		}
-		if (mat[i][j].bestSubs == mat[i - 1][j - 1].bestSubs + mat[i][j].totalOp) {
-			return retrieveStartPos(i - 1, j - 1);
-		} else if (mat[i][j].bestSubs == mat[i - 1][j].bestSubs + mat[i][1].totalOp) {
-			return retrieveStartPos(i - 1, j);
+		
+		if (j > 0) {
+
+			int subCost = 0;
+			if (rWords[i - 1].compareTo(nWords[j - 1]) != 0) {
+				subCost = 1;
+			}
+			
+			if (mat[i][j].bestSubs == mat[i - 1][j - 1].bestSubs + subCost) {
+				return retrieveStartPos(i - 1, j - 1);
+			} else if (mat[i][j].bestSubs == mat[i - 1][j].bestSubs + 1) {
+				return retrieveStartPos(i - 1, j);
+			} else {
+				return retrieveStartPos(i, j - 1);
+			}
+
 		} else {
-			return retrieveStartPos(i, j - 1);
+			return retrieveStartPos(i - 1, j);
 		}
+
 	}
 }
