@@ -63,6 +63,10 @@ public class WordErrorRate {
 
 	private MatEl[][] mat;
 
+	public WordErrorRate() {
+		
+	}
+	
 	public WordErrorRate(String ref, String n) {
 		rWords = removeAllFormating(ref).split(" ");
 		nWords = removeAllFormating(n).split(" ");
@@ -73,6 +77,22 @@ public class WordErrorRate {
 		nWords = nW;
 	}
 
+	public void setRefWords(String refWords) {
+		rWords = removeAllFormating(refWords).split(" ");
+	}
+	
+	public void setRefWords(String[] refWords) {
+		rWords = refWords;
+	}
+	
+	public void setNewWords(String newWords) {
+		nWords = removeAllFormating(newWords).split(" ");
+	}
+	
+	public void setNewWords(String[] newWords) {
+		nWords = newWords;
+	}
+	
 	public void evaluate() {
 		int m = rWords.length + 1;
 		int n = nWords.length + 1;

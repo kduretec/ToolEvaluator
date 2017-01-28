@@ -10,6 +10,8 @@ public class DocumentElements {
 
 	private String[] allText = null;
 	
+	private Integer[] wordPositions = null;
+	
 	private List<String> lines = null;
 	
 	private Map<String, Integer> wordHistogram;
@@ -81,6 +83,14 @@ public class DocumentElements {
 
 	public void setWordHistogram(Map<String, Integer> wordHistogram) {
 		this.wordHistogram = wordHistogram;
+	}
+	
+	public Integer[] getWordPositions() {
+		return wordPositions;
+	}
+
+	public void setWordPositions(Integer[] wordPositions) {
+		this.wordPositions = wordPositions;
 	}
 
 	public IElement mergeElements(int startPos, int endPos) {
