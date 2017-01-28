@@ -26,7 +26,9 @@ public class TextMatcher implements IMatcher {
 				int startL = toolOutput.getWordPositions()[startW].intValue();
 				int endL = toolOutput.getWordPositions()[endW].intValue();
 				gE.setMatchWordPosition(startW, endW);
-				gE.setMatchLinePosition(startL, endL);				
+				gE.setMatchLinePosition(startL, endL);		
+				
+				// TODO add some measures to the element
 			}
 		}
 		
