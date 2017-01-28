@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
+import org.benchmarkdp.toolevaluator.matcher.ElementMatcher;
 import org.benchmarkdp.toolevaluator.measure.IMeasure;
 import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
@@ -21,13 +22,13 @@ public class Evaluator {
 
 	private Loader loader;
 
-	private Matcher matcher;
+	private ElementMatcher matcher;
 
 	private IOutputWriter output;
 
 	public Evaluator() {
 		loader = new Loader();
-		matcher = new Matcher();
+		matcher = new ElementMatcher();
 		output = new XMLOutputWriter();
 	}
 

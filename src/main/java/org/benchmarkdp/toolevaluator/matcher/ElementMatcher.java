@@ -1,4 +1,4 @@
-package org.benchmarkdp.toolevaluator;
+package org.benchmarkdp.toolevaluator.matcher;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.IElement;
 import org.benchmarkdp.toolevaluator.utils.WordErrorRate;
 
-public class Matcher {
+public class ElementMatcher implements IMatcher{
 
 	public void match(DocumentElements groundTruth, DocumentElements toolOutput) {
 

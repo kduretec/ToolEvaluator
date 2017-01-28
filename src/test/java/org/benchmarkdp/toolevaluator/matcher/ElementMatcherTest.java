@@ -1,4 +1,4 @@
-package org.benchmarkdp.toolevaluator;
+package org.benchmarkdp.toolevaluator.matcher;
 
 import static org.junit.Assert.*;
 
@@ -9,9 +9,10 @@ import org.benchmarkdp.toolevaluator.elements.GroundTruthElement;
 import org.benchmarkdp.toolevaluator.elements.IElement;
 import org.benchmarkdp.toolevaluator.elements.Text;
 import org.benchmarkdp.toolevaluator.elements.ToolElement;
+import org.benchmarkdp.toolevaluator.matcher.ElementMatcher;
 import org.junit.Test;
 
-public class MatcherTest {
+public class ElementMatcherTest {
 
 	
 	
@@ -126,7 +127,7 @@ public class MatcherTest {
 		
 		assertTrue(tol.getNumElements()==10);
 		assertTrue(tol.getElement(4).getTextElement().getText().compareTo("paragraph")==0);
-		Matcher m = new Matcher();
+		ElementMatcher m = new ElementMatcher();
 		m.match(gt, tol);
 		
 		assertTrue(egt1.getMatch() == etol1);
