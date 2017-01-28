@@ -35,9 +35,13 @@ public class GroundTruthElement implements IElement {
 		return textEl;
 	}
 
-	public void clearMeasures() {
+	public void clearMatch() {
 		mEl = new MeasureValue();
-		
+		match = null;
+		startWord = -1;
+		endWord = -1;
+		startLine = -1;
+		endLine = -1;
 	}
 	
 	public MeasureValue getMeasureElement() {

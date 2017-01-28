@@ -2,8 +2,10 @@
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.Text;
 import org.benchmarkdp.toolevaluator.tool.parser.IParser;
 
@@ -32,14 +34,14 @@ public class SoftwareTool extends AbstractTool {
 		return toolName;
 	}
 
-	public List<Text> getTextElements(String testCase, String fileExstension) {
+	public List<Text> getTextElements(String testCase, String testFormat, String fileExstension) {
 		
 		String path = pathToolFolder + "/" + testCase + "." + fileExstension;
 		File f = new File(path);
 		List<Text> lTxt = new ArrayList<Text>(); 
 		if (f.exists()) {
 			String s = readFileToString(f);
-			lTxt = parser.parseToTextElements(s, fileExstension);
+			lTxt = parser.parseToTextElements(s, testFormat);
 		}
 	
 		return lTxt;
@@ -53,4 +55,26 @@ public class SoftwareTool extends AbstractTool {
 		return pathResults;
 	}
 
+	public DocumentElements getDocumentElements(String testCase, String testFormat, String fileExtension) {
+	
+		DocumentElements toolOutput = new DocumentElements();
+		String path = pathToolFolder + "/" + testCase + "." + fileExtension;
+		File f = new File(path);
+		if (f.exists()) {
+			String s = readFileToString(f);
+			parser.parse(s, testFormat);
+			toolOutput.setAllText(parser.getAllWords());
+			toolOutput.setLines(parser.getLines());
+			toolOutput.setWordHistogram(parser.getWordHistogram());
+			toolOutput.setWordPositions(parser.getWordsPositions());			
+		} else {
+			toolOutput.setAllText(null);
+			toolOutput.setLines(null);
+			toolOutput.setWordHistogram(null);
+			toolOutput.setWordPositions(null);
+		}
+		
+		
+		return toolOutput;
+	}
 }

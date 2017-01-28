@@ -4,7 +4,7 @@ public interface IElement {
 
 	public Text getTextElement();
 	
-	public void clearMeasures(); 
+	public void clearMatch(); 
 	
 	public MeasureValue getMeasureElement();
 	

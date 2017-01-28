@@ -27,7 +27,7 @@ public class TextMatcher implements IMatcher {
 				int endL = toolOutput.getWordPositions()[endW].intValue();
 				gE.setMatchWordPosition(startW, endW);
 				gE.setMatchLinePosition(startL, endL);		
-				
+				gE.getMeasureElement().addMeasureValue("percCorr", new Double(perc));
 				// TODO add some measures to the element
 			}
 		}

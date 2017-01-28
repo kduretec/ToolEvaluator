@@ -4,7 +4,10 @@ import java.io.File;
 import java.util.List;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
-import org.benchmarkdp.toolevaluator.matcher.ElementMatcher;
+import org.benchmarkdp.toolevaluator.loader.GenericLoader;
+import org.benchmarkdp.toolevaluator.loader.ILoader;
+import org.benchmarkdp.toolevaluator.matcher.IMatcher;
+import org.benchmarkdp.toolevaluator.matcher.TextMatcher;
 import org.benchmarkdp.toolevaluator.measure.IMeasure;
 import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
@@ -20,15 +23,15 @@ public class Evaluator {
 
 	private List<IMeasure> pMeasures;
 
-	private Loader loader;
+	private ILoader loader;
 
-	private ElementMatcher matcher;
+	private IMatcher matcher;
 
 	private IOutputWriter output;
 
 	public Evaluator() {
-		loader = new Loader();
-		matcher = new ElementMatcher();
+		loader = new GenericLoader();
+		matcher = new TextMatcher();
 		output = new XMLOutputWriter();
 	}
 
@@ -55,10 +58,11 @@ public class Evaluator {
 		for (String testFile : testNames) {
 			System.out.println("Processing file " + testFile);
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
+			String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
 
 			for (ITool tool : tools) {
-				DocumentElements gtElements = loader.getGroundTruth(testName, groundTruthTool);
-				DocumentElements toElements = loader.getToolOutput(testName, tool);
+				DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
+				DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
 
 				matcher.match(gtElements, toElements);
 

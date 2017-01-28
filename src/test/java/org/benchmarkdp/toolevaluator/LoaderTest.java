@@ -3,6 +3,7 @@ package org.benchmarkdp.toolevaluator;
 import static org.junit.Assert.*;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
+import org.benchmarkdp.toolevaluator.loader.Loader;
 import org.benchmarkdp.toolevaluator.tool.SoftwareTool;
 import org.benchmarkdp.toolevaluator.tool.parser.ApacheTikaParser;
 import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
@@ -19,8 +20,8 @@ public class LoaderTest {
 
 		String testCase = "testCase1";
 
-		DocumentElements gtElements = lod.getGroundTruth(testCase, gTool);
-		DocumentElements tiElements = lod.getToolOutput(testCase, tTool);
+		DocumentElements gtElements = lod.getGroundTruth(testCase, "xml", gTool);
+		DocumentElements tiElements = lod.getToolOutput(testCase, "pdf", tTool);
 		assertTrue(gtElements.getNumElements() == 2);
 		assertTrue(gtElements.getElement(0).getTextElement().getID().compareTo("12345678") == 0);
 		assertTrue(gtElements.getElement(1).getTextElement().getID().compareTo("678543") == 0);

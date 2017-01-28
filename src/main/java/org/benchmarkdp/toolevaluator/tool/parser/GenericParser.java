@@ -13,6 +13,7 @@ public class GenericParser extends AbstractParser implements IParser {
 
 	private List<Integer> lineInfo;
 
+	@Override
 	public void parse(String text, String format) {
 
 		lines = new ArrayList<String>();

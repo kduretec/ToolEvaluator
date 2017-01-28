@@ -24,7 +24,7 @@ public class ToolElement implements IElement {
 		return textEl;
 	}
 
-	public void clearMeasures() {
+	public void clearMatch() {
 		throw new UnsupportedOperationException();
 	}
 	

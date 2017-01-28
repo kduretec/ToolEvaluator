@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.benchmarkdp.toolevaluator.measure.IMeasure;
-import org.benchmarkdp.toolevaluator.measure.IntegrityMeasure;
-import org.benchmarkdp.toolevaluator.measure.OrderMeasure;
-import org.benchmarkdp.toolevaluator.measure.PercCorMeasure;
-import org.benchmarkdp.toolevaluator.measure.WERMeasure;
+import org.benchmarkdp.toolevaluator.tool.GroundTruthTool;
 import org.benchmarkdp.toolevaluator.tool.ITool;
 import org.benchmarkdp.toolevaluator.tool.SoftwareTool;
-import org.benchmarkdp.toolevaluator.tool.parser.ApacheTikaParser;
+import org.benchmarkdp.toolevaluator.tool.parser.GenericParser;
 import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
-import org.benchmarkdp.toolevaluator.tool.parser.XPdfParser;
 
 /**
  * Hello world!
@@ -44,21 +40,21 @@ public class App {
 
 	private void initializeMeasures() {
 		List<IMeasure> measures = new ArrayList<IMeasure>();
-		measures.add(new WERMeasure());
-		measures.add(new PercCorMeasure());
-		measures.add(new OrderMeasure());
-		measures.add(new IntegrityMeasure());
+		//measures.add(new WERMeasure());
+		//measures.add(new PercCorMeasure());
+		//measures.add(new OrderMeasure());
+		//measures.add(new IntegrityMeasure());
 		evaluator.setMeasures(measures);
 	}
 
 	private void initializeTools() {
 
-		ITool gtTool = new SoftwareTool("GroundTruth", mainPath + "GroundTruth/Text", null, new GroundTruthParser());
+		ITool gtTool = new GroundTruthTool("GroundTruth", mainPath + "GroundTruth/Text", null, new GroundTruthParser());
 		evaluator.setGroundTruthTool(gtTool);
 
 		List<ITool> tools = new ArrayList<ITool>();
 		ITool tika11 = new SoftwareTool("ApacheTika_11", toolOutput + "/ApacheTika1_1/text",
-				toolOutput + "/ApacheTika1_1/results", new ApacheTikaParser());
+				toolOutput + "/ApacheTika1_1/results", new GenericParser());
 		// ITool tika12 = new SoftwareTool("ApacheTika_12", toolOutput +
 		// "/ApacheTika1_2/text",
 		// toolOutput + "/ApacheTika1_2/results", new ApacheTikaParser());
@@ -78,7 +74,7 @@ public class App {
 		// "/LibreOffice/text", toolOutput + "/LibreOffice/results",
 		// new LibreOfficeParser());
 		ITool xpdf = new SoftwareTool("Xpdf", toolOutput + "/Xpdf/text", toolOutput + "/Xpdf/results",
-				new XPdfParser());
+				new GenericParser());
 		tools.add(tika11);
 		// tools.add(tika12);
 		// tools.add(tika113);
