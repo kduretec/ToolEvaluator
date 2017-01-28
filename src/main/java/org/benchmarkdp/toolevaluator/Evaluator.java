@@ -54,9 +54,11 @@ public class Evaluator {
 	public void evaluate() {
 
 		String[] testNames = getNames();
-
+		System.out.println("In total " + testNames.length + " detected");
+		long totalStart = System.nanoTime();
 		for (String testFile : testNames) {
-			System.out.println("Processing file " + testFile);
+			System.out.println("Processing TestCase " + testFile);
+			long startTime = System.nanoTime();
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
 			String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
 
@@ -71,9 +73,14 @@ public class Evaluator {
 				}
 
 				output.save(gtElements, testName, testFile, tool);
-
 			}
+			long endTime = System.nanoTime();
+			double elapsedTime = ((double)endTime - startTime) / 1000000000; 
+			System.out.println("TestCase " + testFile  + " processed in " + elapsedTime + " seconds");
 		}
+		long totalEnd = System.nanoTime();
+		double totalElapsed = ((double)totalEnd - totalStart) / 1000000000;
+		System.out.println("Evaluation done in " + totalElapsed + " seconds");
 	}
 
 	private String[] getNames() {

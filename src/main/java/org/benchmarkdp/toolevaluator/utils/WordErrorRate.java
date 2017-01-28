@@ -64,9 +64,9 @@ public class WordErrorRate {
 	private MatEl[][] mat;
 
 	public WordErrorRate() {
-		
+
 	}
-	
+
 	public WordErrorRate(String ref, String n) {
 		rWords = removeAllFormating(ref).split(" ");
 		nWords = removeAllFormating(n).split(" ");
@@ -80,19 +80,19 @@ public class WordErrorRate {
 	public void setRefWords(String refWords) {
 		rWords = removeAllFormating(refWords).split(" ");
 	}
-	
+
 	public void setRefWords(String[] refWords) {
 		rWords = refWords;
 	}
-	
+
 	public void setNewWords(String newWords) {
 		nWords = removeAllFormating(newWords).split(" ");
 	}
-	
+
 	public void setNewWords(String[] newWords) {
 		nWords = newWords;
 	}
-	
+
 	public void evaluate() {
 		int m = rWords.length + 1;
 		int n = nWords.length + 1;
@@ -154,17 +154,18 @@ public class WordErrorRate {
 		endPos = minBestSubsPos;
 		startPos = retrieveStartPos(m - 1, endPos);
 
-		// updating to match exact string positions as additional
-		// row and column are added
-		startPos = startPos - 1;
-		endPos = endPos - 1;
-
 		totalOp = mat[m - 1][n - 1].totalOp;
 		deletion = mat[m - 1][n - 1].deletion;
 		substitution = mat[m - 1][n - 1].substitution;
 		insertion = mat[m - 1][n - 1].insertion;
 		correct = mat[m - 1][n - 1].correct;
 		numberOfWords = rWords.length;
+
+		// updating to match exact string positions as additional
+		// row and column are added
+		startPos = startPos - 1;
+		endPos = endPos - 1;
+
 	}
 
 	public int getTotalOp() {
@@ -230,14 +231,14 @@ public class WordErrorRate {
 		if (i == 0) {
 			return j + 1;
 		}
-		
+
 		if (j > 0) {
 
 			int subCost = 0;
 			if (rWords[i - 1].compareTo(nWords[j - 1]) != 0) {
 				subCost = 1;
 			}
-			
+
 			if (mat[i][j].bestSubs == mat[i - 1][j - 1].bestSubs + subCost) {
 				return retrieveStartPos(i - 1, j - 1);
 			} else if (mat[i][j].bestSubs == mat[i - 1][j].bestSubs + 1) {
