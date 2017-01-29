@@ -13,6 +13,8 @@ public interface ITool {
 	
 	public String getResultsPath();
 	
+	public boolean canProcess(String format);
+	
 	public List<Text> getTextElements(String testCase, String testFormat, String fileExstension);
 	
 	public DocumentElements getDocumentElements(String testCase, String testFormat, String fileExtension);

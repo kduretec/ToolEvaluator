@@ -30,6 +30,13 @@ public class GroundTruthTool extends SoftwareTool{
 		pathResults = resultsPath;
 	}
 	
+	public boolean canProcess(String format) {
+		if (format.compareTo("xml")==0) {
+			return true;
+		}
+		return false;
+	}
+	
 	public DocumentElements getDocumentElements(String testCase, String testFormat, String fileExtension) {
 		
 		DocumentElements toolOutput = new DocumentElements();

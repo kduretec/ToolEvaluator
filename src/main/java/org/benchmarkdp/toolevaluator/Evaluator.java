@@ -56,30 +56,40 @@ public class Evaluator {
 		String[] testNames = getNames();
 		System.out.println("In total " + testNames.length + " detected");
 		long totalStart = System.nanoTime();
+		int totalTestCases = testNames.length;
+		int currentTestCase = 0;
 		for (String testFile : testNames) {
+			currentTestCase++;
 			System.out.println("Processing TestCase " + testFile);
 			long startTime = System.nanoTime();
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
 			String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
 
 			for (ITool tool : tools) {
-				DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
-				DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
 
-				matcher.match(gtElements, toElements);
+				if (tool.canProcess(extension)) {
+					DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
+					DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
 
-				for (IMeasure measure : pMeasures) {
-					measure.measure(gtElements, toElements);
+					matcher.match(gtElements, toElements);
+
+					for (IMeasure measure : pMeasures) {
+						measure.measure(gtElements, toElements);
+					}
+
+					output.save(gtElements, testName, testFile, tool);
 				}
-
-				output.save(gtElements, testName, testFile, tool);
 			}
+			
 			long endTime = System.nanoTime();
-			double elapsedTime = ((double)endTime - startTime) / 1000000000; 
-			System.out.println("TestCase " + testFile  + " processed in " + elapsedTime + " seconds");
+			double elapsedTime = ((double) endTime - startTime) / 1000000000;
+			System.out.println("TestCase[" + currentTestCase + "/" + totalTestCases + "] " + testFile + " processed in "
+					+ elapsedTime + " seconds");
+		
 		}
+		
 		long totalEnd = System.nanoTime();
-		double totalElapsed = ((double)totalEnd - totalStart) / 1000000000;
+		double totalElapsed = ((double) totalEnd - totalStart) / 1000000000;
 		System.out.println("Evaluation done in " + totalElapsed + " seconds");
 	}
 

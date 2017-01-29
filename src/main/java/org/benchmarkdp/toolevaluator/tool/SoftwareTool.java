@@ -18,22 +18,29 @@ public class SoftwareTool extends AbstractTool {
 	private String pathResults;
 	
 	private IParser parser;
+	
+	List<String> formatsSupported;
 
 	public SoftwareTool() {
 
 	}
 
-	public SoftwareTool(String tName, String pathText, String resultsPath, IParser par) {
+	public SoftwareTool(String tName, String pathText, String resultsPath, IParser par, List<String> fS) {
 		toolName = tName;
 		parser = par;
 		pathToolFolder = pathText;
 		pathResults = resultsPath;
+		formatsSupported = fS;
 	}
 
 	public String getToolName() {
 		return toolName;
 	}
 
+	public boolean canProcess(String format) {
+		return formatsSupported.contains(format);
+	}
+	
 	public List<Text> getTextElements(String testCase, String testFormat, String fileExstension) {
 		
 		String path = pathToolFolder + "/" + testCase + "." + fileExstension;

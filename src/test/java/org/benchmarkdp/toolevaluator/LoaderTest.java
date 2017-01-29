@@ -2,6 +2,8 @@ package org.benchmarkdp.toolevaluator;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.loader.Loader;
 import org.benchmarkdp.toolevaluator.tool.SoftwareTool;
@@ -15,8 +17,8 @@ public class LoaderTest {
 	public void Test1() {
 		Loader lod = new Loader();
 
-		SoftwareTool gTool = new SoftwareTool("GroundTruth", "src/test/resources/GroundTruth", null,  new GroundTruthParser());
-		SoftwareTool tTool = new SoftwareTool("ApacheTika", "src/test/resources/ApacheTika/text", null, new ApacheTikaParser());
+		SoftwareTool gTool = new SoftwareTool("GroundTruth", "src/test/resources/GroundTruth", null,  new GroundTruthParser(), null);
+		SoftwareTool tTool = new SoftwareTool("ApacheTika", "src/test/resources/ApacheTika/text", null, new ApacheTikaParser(), null);
 
 		String testCase = "testCase1";
 
