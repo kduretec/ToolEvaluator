@@ -9,15 +9,15 @@ public class DocumentElements {
 	private String source;
 
 	private String[] allText = null;
-	
+
 	private Integer[] wordPositions = null;
-	
+
 	private List<String> lines = null;
-	
+
 	private Map<String, Integer> wordHistogram;
-	
+
 	private List<IElement> elements = null;
-	
+
 	private MeasureValue documentMeasures;
 
 	public DocumentElements() {
@@ -60,7 +60,7 @@ public class DocumentElements {
 	public MeasureValue getMeasureValue() {
 		return documentMeasures;
 	}
-	
+
 	public String[] getAllText() {
 		return allText;
 	}
@@ -84,7 +84,7 @@ public class DocumentElements {
 	public void setWordHistogram(Map<String, Integer> wordHistogram) {
 		this.wordHistogram = wordHistogram;
 	}
-	
+
 	public Integer[] getWordPositions() {
 		return wordPositions;
 	}
@@ -114,9 +114,20 @@ public class DocumentElements {
 		int removInd = startPos + 1;
 		for (int i = removInd; i <= endPos; i++) {
 			elements.remove(removInd);
-			
+
 		}
 
 		return newEl;
 	}
+
+	public String[] getWordsFromTo(int start, int end) {
+
+		String[] tmp = new String[end - start + 1];
+		for (int i = start, j = 0; i <= end; i++, j++) {
+			tmp[j] = allText[i];
+		}
+
+		return tmp;
+	}
+
 }
