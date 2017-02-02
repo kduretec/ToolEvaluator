@@ -60,8 +60,8 @@ public class Evaluator {
 		int currentTestCase = 0;
 		for (String testFile : testNames) {
 			currentTestCase++;
-			if (testFile.compareTo("b87d1ff77b7b402d8cd5224225c28487.pdf") != 0)
-				continue;
+			//if (testFile.compareTo("b87d1ff77b7b402d8cd5224225c28487.pdf") != 0)
+			//	continue;
 			System.out.println("Processing TestCase " + testFile);
 			long startTime = System.nanoTime();
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
