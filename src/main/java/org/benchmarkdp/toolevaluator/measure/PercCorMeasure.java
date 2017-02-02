@@ -15,8 +15,8 @@ public class PercCorMeasure implements IMeasure {
 			if (el.isMatched()) {
 				totalMatched++;
 			}
-			Integer c = (Integer) el.getMeasureElement().getMeasureValue("WER_C");
-			Integer n = (Integer) el.getMeasureElement().getMeasureValue("WER_N");
+			Integer c = (Integer) el.getMeasureElement().getMeasureValue("C");
+			Integer n = (Integer) el.getMeasureElement().getMeasureValue("N");
 			correct += c.intValue();
 			total += n.intValue();
 		}

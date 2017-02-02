@@ -6,7 +6,6 @@ import org.benchmarkdp.toolevaluator.elements.IElement;
 public class TextOrderMeasure implements IMeasure {
 
 	public void measure(DocumentElements gt, DocumentElements tool) {
-		int missing = 0;
 		boolean orderPreserved = true;
 		int currentStart = 0;
 		for (int i = 0; i < gt.getNumElements(); i++) {
@@ -18,13 +17,9 @@ public class TextOrderMeasure implements IMeasure {
 					orderPreserved = false;
 				} 
 				currentStart = start;
-			} else {
-				missing++;
 			}
 		}
-		double missingPerc = (double)missing/gt.getNumElements();
 		
-		gt.addMeasure("missingPerc", new Double(missingPerc));
 		gt.addMeasure("orderPreserved", new Boolean(orderPreserved));
 
 	}

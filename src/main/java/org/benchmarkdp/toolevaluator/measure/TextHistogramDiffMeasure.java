@@ -14,9 +14,20 @@ public class TextHistogramDiffMeasure implements IMeasure {
 		int gtDiffWords = histGT.size();
 		int toolDiffWords = histTool.size();
 
-		int diff = gtDiffWords - toolDiffWords;
+		int wordDiff = 0;
 
-		gt.addMeasure("HIST_DIFF", new Integer(diff));
+		for (Map.Entry<String, Integer> ent : histGT.entrySet()) {
+			String word = ent.getKey();
+			int gtValue = ent.getValue().intValue();
+
+			if (histTool.containsKey(word)) {
+				int toolValue = histTool.get(word).intValue();
+				wordDiff += toolValue < gtValue ? gtValue - toolValue : 0;
+			} else {
+				wordDiff += gtValue;
+			}
+		}
+		gt.addMeasure("wordDiff", new Integer(wordDiff));
 
 	}
 
