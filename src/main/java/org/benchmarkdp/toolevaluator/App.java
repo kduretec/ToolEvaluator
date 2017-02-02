@@ -68,11 +68,11 @@ public class App {
 		evaluator.setGroundTruthTool(gtTool);
 
 		List<ITool> tools = new ArrayList<ITool>();
-		ITool tika11 = new SoftwareTool("ApacheTika_11", toolOutput + "/ApacheTika1_1/text",
+		ITool tika11 = new SoftwareTool("Apache Tika v1.1", toolOutput + "/ApacheTika1_1/text",
 				toolOutput + "/ApacheTika1_1/results", new GenericParser(), Arrays.asList("docx","odt","pdf"));
-		ITool tika12 = new SoftwareTool("ApacheTika_12", toolOutput + "/ApacheTika1_2/text",
+		ITool tika12 = new SoftwareTool("Apache Tika v1.2", toolOutput + "/ApacheTika1_2/text",
 				toolOutput + "/ApacheTika1_2/results", new GenericParser(), Arrays.asList("docx","odt","pdf"));
-		ITool tika113 = new SoftwareTool("ApacheTika_113", toolOutput + "/ApacheTika1_13/text",
+		ITool tika113 = new SoftwareTool("Apache Tika v1.13", toolOutput + "/ApacheTika1_13/text",
 				toolOutput + "/ApacheTika1_13/results", new GenericParser(), Arrays.asList("docx","odt","pdf"));
 		// ITool textUtil = new SoftwareTool("TextUtil", toolOutput +
 		// "/TextUtil/text", toolOutput + "/TextUtil/results",
