@@ -60,6 +60,8 @@ public class Evaluator {
 		int currentTestCase = 0;
 		for (String testFile : testNames) {
 			currentTestCase++;
+			if (testFile.compareTo("b87d1ff77b7b402d8cd5224225c28487.pdf") != 0)
+				continue;
 			System.out.println("Processing TestCase " + testFile);
 			long startTime = System.nanoTime();
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
@@ -80,14 +82,14 @@ public class Evaluator {
 					output.save(gtElements, testName, testFile, tool);
 				}
 			}
-			
+
 			long endTime = System.nanoTime();
 			double elapsedTime = ((double) endTime - startTime) / 1000000000;
 			System.out.println("TestCase[" + currentTestCase + "/" + totalTestCases + "] " + testFile + " processed in "
 					+ elapsedTime + " seconds");
-		
+
 		}
-		
+
 		long totalEnd = System.nanoTime();
 		double totalElapsed = ((double) totalEnd - totalStart) / 1000000000;
 		System.out.println("Evaluation done in " + totalElapsed + " seconds");

@@ -18,7 +18,8 @@ public class TextMatcher implements IMatcher {
 			int c = wer.getCorrect();
 			int n = wer.getNumberOfWords();
 			double perc = (double) c / n;
-			
+			//System.out.println("Matching " + gE.getTextElement().getID());
+			//System.out.println(" perc = " + perc + " start=" + wer.getStartPos());
 			//we match those which have more than 50% correct words
 			if (perc > 0.5) {
 				int startW = wer.getStartPos();

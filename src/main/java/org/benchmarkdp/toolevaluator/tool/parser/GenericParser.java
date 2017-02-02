@@ -29,24 +29,27 @@ public class GenericParser extends AbstractParser implements IParser {
 		for (int i = 0; i < text.length(); i++) {
 			char c = text.charAt(i);
 			sbAll.append(c);
-			if (Character.isAlphabetic(c)) {
+			if (Character.isAlphabetic(c) || Character.isDigit(c)) {
 				word.append(c);
 				line.append(c);
 			} else if (Character.isWhitespace(c)) {
 				String w = word.toString();
 				if (w.length() > 0) {
+					//System.out.println("Adding word " + w);
 					allWords.add(w);
 					addWordToHistogram(w);
 					lineInfo.add(new Integer(lineNumber));
 				}
 				word = new StringBuilder();
-				if (c == '\n') {
+				if (c == '\n' || c == '\r') {
 					String l = line.toString();
 					if (l.length() > 0) {
 						lines.add(l);
 						line = new StringBuilder();
 						lineNumber++;						
 					}
+				} else {
+					line.append(c);
 				}
 			}
 		}

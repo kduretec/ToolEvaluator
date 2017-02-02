@@ -87,11 +87,11 @@ public class App {
 		// new LibreOfficeParser());
 		ITool xpdf = new SoftwareTool("Xpdf", toolOutput + "/Xpdf/text", toolOutput + "/Xpdf/results",
 				new GenericParser(), Arrays.asList("pdf"));
-		tools.add(tika11);
-		tools.add(tika12);
+		//tools.add(tika11);
+		//tools.add(tika12);
 		//tools.add(tika113);
 		// tools.add(textUtil);
-		// tools.add(docToText);
+		 tools.add(docToText);
 		// tools.add(abiWord);
 		// tools.add(libreOffice);
 		//tools.add(xpdf);
