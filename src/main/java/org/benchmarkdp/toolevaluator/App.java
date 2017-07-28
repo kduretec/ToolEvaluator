@@ -79,9 +79,8 @@ public class App {
 		// new ApacheTikaParser());
 		ITool docToText = new SoftwareTool("DocToText", toolOutput + "/DocToText/text",
 				toolOutput + "/DocToText/results", new GenericParser(), Arrays.asList("docx","odt","pdf"));
-		// ITool abiWord = new SoftwareTool("AbiWord", toolOutput +
-		// "/AbiWord/text", toolOutput + "/AbiWord/results",
-		// new AbiWordParser());
+		 ITool abiWord = new SoftwareTool("AbiWord", toolOutput +
+		 "/AbiWord/text", toolOutput + "/AbiWord/results", new GenericParser(), Arrays.asList("docx","odt","pdf"));
 		// ITool libreOffice = new SoftwareTool("LibreOffice", toolOutput +
 		// "/LibreOffice/text", toolOutput + "/LibreOffice/results",
 		// new LibreOfficeParser());
@@ -96,10 +95,10 @@ public class App {
 		// tools.add(tika113);
 		// tools.add(textUtil);
 		// tools.add(docToText);
-		// tools.add(abiWord);
+		tools.add(abiWord);
 		// tools.add(libreOffice);
 		// tools.add(xpdf);
-		tools.add(icecite);
+		//tools.add(icecite);
 		 //tools.add(xpdfmain);
 		evaluator.setTools(tools);
 	}
