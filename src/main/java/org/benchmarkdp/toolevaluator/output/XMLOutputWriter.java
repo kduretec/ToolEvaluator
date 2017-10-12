@@ -26,10 +26,13 @@ public class XMLOutputWriter implements IOutputWriter{
 	public void save(DocumentElements values, String testName, String testFile, ITool tool) {
 		
 		String pathRes = tool.getResultsPath();
-		File f = new File(pathRes);
-		if (!f.exists()) {
-			f.mkdir();
-		}
+		
+		createResDir(pathRes); 
+		
+//		File f = new File(pathRes);
+//		if (!f.exists()) {
+//			f.mkdir();
+//		}
 
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -98,5 +101,17 @@ public class XMLOutputWriter implements IOutputWriter{
 		return measures;
 	}
 	
+	
+	private void createResDir(String path) {
+		if (path.endsWith("/")) {
+			path = path.substring(0, path.length()-1);
+		}
+		File f = new File(path);
+		if (!f.exists()) {
+			path = path.substring(0, path.lastIndexOf("/"));
+			createResDir(path);
+			f.mkdir();
+		}
+	}
 
 }

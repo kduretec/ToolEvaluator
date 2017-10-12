@@ -1,6 +1,7 @@
 package org.benchmarkdp.toolevaluator;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.List;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
@@ -97,7 +98,16 @@ public class Evaluator {
 
 	private String[] getNames() {
 		File f = new File(documentPath);
-		String[] names = f.list();
+		String[] names = f.list(testFilter);
 		return names;
 	}
+	
+	private FilenameFilter testFilter = new FilenameFilter() {
+		public boolean accept (File dir, String name) {
+			if (name.compareTo(".DS_Store")==0) {
+				return false;
+			}
+			return true;
+		}
+	};
 }

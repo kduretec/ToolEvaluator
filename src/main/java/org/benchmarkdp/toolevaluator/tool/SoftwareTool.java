@@ -44,6 +44,7 @@ public class SoftwareTool extends AbstractTool {
 	public List<Text> getTextElements(String testCase, String testFormat, String fileExstension) {
 		
 		String path = pathToolFolder + "/" + testCase + "." + fileExstension;
+		//System.out.println("PATH =" + path);
 		File f = new File(path);
 		List<Text> lTxt = new ArrayList<Text>(); 
 		if (f.exists()) {
@@ -66,6 +67,7 @@ public class SoftwareTool extends AbstractTool {
 	
 		DocumentElements toolOutput = new DocumentElements();
 		String path = pathToolFolder + "/" + testCase + "." + fileExtension;
+		//System.out.println("PATH=" + path);
 		File f = new File(path);
 		if (f.exists()) {
 			String s = readFileToString(f);
