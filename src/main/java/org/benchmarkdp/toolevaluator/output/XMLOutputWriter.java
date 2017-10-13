@@ -28,11 +28,6 @@ public class XMLOutputWriter implements IOutputWriter{
 		String pathRes = tool.getResultsPath();
 		
 		createResDir(pathRes); 
-		
-//		File f = new File(pathRes);
-//		if (!f.exists()) {
-//			f.mkdir();
-//		}
 
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
