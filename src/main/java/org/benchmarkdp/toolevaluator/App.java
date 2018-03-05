@@ -35,7 +35,7 @@ public class App {
 	
 	private String groundTruthPath = mainPath + experimentName + "/GroundTruth/Text";
 	
-	private String resultsOutput = mainPath + experimentName + "/Results";
+	private String resultsOutput = mainPath + experimentName + "/Results/Tools";
 
 	public App() {
 		evaluator = new Evaluator();

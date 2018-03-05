@@ -67,19 +67,19 @@ public class WordErrorRateTest {
 		wer.evaluate();
 		int startPos = wer.getStartPos();
 		int endPos = wer.getEndPos();
-		//System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		System.out.println("startPos=" + startPos + " endPos=" + endPos);
 		assertTrue(startPos == 3 && endPos == 10);
 	}
 	
 	@Test
 	public void Test6() {
 		String s1 = "This is a string that should be found";
-		String s2 = "This is a This is a string that Another string goes from here";
+		String s2 = "Thiss is a This is a string that Another string goes from here";
 		WordErrorRate wer = new WordErrorRate(s1, s2);
 		wer.evaluate();
 		int startPos = wer.getStartPos();
 		int endPos = wer.getEndPos();
-		//System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		System.out.println("startPos=" + startPos + " endPos=" + endPos);
 		assertTrue(startPos == 3 && endPos == 7);
 	}
 	
