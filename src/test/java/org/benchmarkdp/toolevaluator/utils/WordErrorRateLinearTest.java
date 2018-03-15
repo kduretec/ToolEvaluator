@@ -47,5 +47,63 @@ public class WordErrorRateLinearTest {
 		checkStrings(s1, s2, 2, 2, 2, 0, 0);
 	}
 	
+	@Test
+	public void Test4() {
+		String s1 = "P1 P2 T1 P3";
+		String s2 = "P1 P2 P3 T1";
+		WordErrorRateLinear wer = new WordErrorRateLinear(s1, s2);
+		wer.evaluatePosition();
+		int startPos = wer.getStartPos();
+		int endPos = wer.getEndPos();
+		System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		assertTrue(startPos == 0 && endPos == 2);
+	}
 	
+	@Test
+	public void Test5() {
+		String s1 = "This is a string that should be found";
+		String s2 = "This is a This is a string that should be found found should be found should be found should be found";
+		WordErrorRateLinear wer = new WordErrorRateLinear(s1, s2);
+		wer.evaluatePosition();
+		int startPos = wer.getStartPos();
+		int endPos = wer.getEndPos();
+		System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		assertTrue(startPos == 3 && endPos == 10);
+	}
+	
+	@Test
+	public void Test6() {
+		String s1 = "This is a string that should be found";
+		String s2 = "This is a This is a string that Another string goes from here";
+		WordErrorRateLinear wer = new WordErrorRateLinear(s1, s2);
+		wer.evaluatePosition();
+		int startPos = wer.getStartPos();
+		int endPos = wer.getEndPos();
+		System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		assertTrue(startPos == 3 && endPos == 7);
+	}
+	
+	@Test
+	public void Test7() {
+		String s1 = "This is a string that should be found";
+		String s2 = "This is a This is a string that might should be found Another string goes from here";
+		WordErrorRateLinear wer = new WordErrorRateLinear(s1, s2);
+		wer.evaluatePosition();
+		int startPos = wer.getStartPos();
+		int endPos = wer.getEndPos();
+		//System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		assertTrue(startPos == 3 && endPos == 11);
+	}
+	
+	@Test
+	public void Test8() {
+		String s1 = "Single";
+		String s2 = "This is a This is a string Single that might should Single be found Another string goes from here";
+		WordErrorRateLinear wer = new WordErrorRateLinear(s1, s2);
+		wer.evaluatePosition();
+		int startPos = wer.getStartPos();
+		int endPos = wer.getEndPos();
+		//System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		assertTrue(startPos == 7 && endPos == 7);
+	}
 }
