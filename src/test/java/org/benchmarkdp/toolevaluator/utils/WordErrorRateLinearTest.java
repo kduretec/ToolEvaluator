@@ -106,4 +106,16 @@ public class WordErrorRateLinearTest {
 		//System.out.println("startPos=" + startPos + " endPos=" + endPos);
 		assertTrue(startPos == 7 && endPos == 7);
 	}
+	
+	@Test
+	public void Test9() {
+		String s1 = "Single";
+		String s2 = "This is a This is a string that might should be found Another string goes from here";
+		WordErrorRateLinear wer = new WordErrorRateLinear(s1, s2);
+		wer.evaluatePosition();
+		int startPos = wer.getStartPos();
+		int endPos = wer.getEndPos();
+		System.out.println("startPos=" + startPos + " endPos=" + endPos);
+		assertTrue(startPos == -1 && endPos == -1);
+	}
 }

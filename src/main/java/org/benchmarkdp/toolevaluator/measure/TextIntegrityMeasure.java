@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.IElement;
-import org.benchmarkdp.toolevaluator.utils.WordErrorRate;
+import org.benchmarkdp.toolevaluator.utils.WordErrorRateLinear;
 
 public class TextIntegrityMeasure implements IMeasure {
 
@@ -31,8 +31,8 @@ public class TextIntegrityMeasure implements IMeasure {
 						boolean intPreserved = true;
 						for (String gtLine : gtLines) {
 							String tLine = toolLines.get(lPos);
-							WordErrorRate err = new WordErrorRate(gtLine, tLine);
-							err.evaluate();
+							WordErrorRateLinear err = new WordErrorRateLinear(gtLine, tLine);
+							err.evaluateWER();
 							int c = err.getCorrect();
 							int n = err.getNumberOfWords();
 							double perc = (double) c / n;

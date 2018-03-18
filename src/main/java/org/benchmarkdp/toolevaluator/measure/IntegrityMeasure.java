@@ -7,7 +7,7 @@ import java.util.Map;
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.IElement;
 import org.benchmarkdp.toolevaluator.elements.Text;
-import org.benchmarkdp.toolevaluator.utils.WordErrorRate;
+import org.benchmarkdp.toolevaluator.utils.WordErrorRateLinear;
 
 public class IntegrityMeasure implements IMeasure {
 
@@ -28,7 +28,7 @@ public class IntegrityMeasure implements IMeasure {
 						List<String> linesTool = mText.getLines();
 						int numCorrect = 0;
 						for (int j = 0; j < linesGT.size(); j++) {
-							WordErrorRate err = new WordErrorRate(linesGT.get(j), linesTool.get(j));
+							WordErrorRateLinear err = new WordErrorRateLinear(linesGT.get(j), linesTool.get(j));
 							int d = err.getDeletion();
 							int ins = err.getInsertion();
 							int sub = err.getSubstitution();

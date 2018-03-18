@@ -103,7 +103,7 @@ public class WordErrorRateLinear {
 		yWords = removeAllFormating(y).split(" ");
 	}
 
-	public void setNewWords(String[] y) {
+	public void setYWords(String[] y) {
 		yWords = y;
 	}
 
@@ -148,12 +148,14 @@ public class WordErrorRateLinear {
 		substitution = el.substitution;
 		insertion = el.insertion;
 		correct = el.correct;
+		numberOfWords = xWords.length;
 	}
 
 	public void evaluatePosition() {
 		Pos pos = calculateHirschberg(xWords, yWords, 0, false);
 		startPos = pos.start;
 		endPos = pos.end;
+		numberOfWords = xWords.length;
 	}
 
 	private MatEl[] calculateWER(String[] x, String[] y) {
@@ -170,8 +172,8 @@ public class WordErrorRateLinear {
 					secondRow[j] = new MatEl(j, 0, 0, j, 0, 0);
 				} else {
 					if (j == 0) {
-						 secondRow[j] = new MatEl(i, i, 0, 0, 0, i);
-						//secondRow[j] = new MatEl(i, i, 0, 0, 0, 0);
+						secondRow[j] = new MatEl(i, i, 0, 0, 0, i);
+						// secondRow[j] = new MatEl(i, i, 0, 0, 0, 0);
 					} else {
 						int subCost = 0;
 						if (x[i - 1].compareTo(y[j - 1]) != 0) {
@@ -215,7 +217,8 @@ public class WordErrorRateLinear {
 
 	private Pos calculateHirschberg(String[] x, String[] y, int level, boolean right) {
 
-		System.out.println("LEVEL: " + level + " X=" + connectStrings(x) + " Y=" + connectStrings(y));
+		// System.out.println("LEVEL: " + level + " X=" + connectStrings(x) + "
+		// Y=" + connectStrings(y));
 		Pos tmpPos = new Pos();
 
 		if (x.length == 0) {
@@ -224,7 +227,7 @@ public class WordErrorRateLinear {
 			return tmpPos;
 		} else if (x.length == 1) {
 			if (right) {
-				for (int j = y.length -1; j >= 0; j--) {
+				for (int j = y.length - 1; j >= 0; j--) {
 					if (x[0].compareTo(y[j]) == 0) {
 						tmpPos.start = j;
 						tmpPos.end = j;
@@ -258,7 +261,7 @@ public class WordErrorRateLinear {
 			String[] syrev = subArray(y, ylen, 0);
 			MatEl[] scoreR = calculateWER(sx2rev, syrev);
 			int ymid = findArgMax(scoreL, scoreR, right);
-			System.out.println(ymid);
+			//System.out.println("ymid=" + ymid);
 			String[] sx2 = subArray(x, xmid + 1, xlen);
 			String[] sy1 = subArray(y, 0, ymid);
 			String[] sy2 = subArray(y, ymid + 1, ylen);
@@ -276,31 +279,48 @@ public class WordErrorRateLinear {
 			} else {
 				tmpPos.end = pos1.end;
 			}
-			System.out.println("LEVEL: " + level + " Current positions " + tmpPos.start + " " + tmpPos.end);
+			// System.out.println("LEVEL: " + level + " Current positions " +
+			// tmpPos.start + " " + tmpPos.end);
 		}
 		return tmpPos;
 	}
 
 	private String[] subArray(String[] st, int i, int j) {
-		if (j == -1 || i == -1)
+
+		if (j < 0 || i < 0)
 			return new String[0];
 
+		if (i >= st.length) {
+			return new String[0];
+		}
 		String[] tmp = null;
-		int inc = i > j ? -1 : 1;
-		int len = Math.abs(j - i) + 1;
-		tmp = new String[len];
-		int cnt = 0;
-		if (len > 0) {
-			while (true) {
-				tmp[cnt] = st[i];
-				if (i == j)
-					break;
-				i = i + inc;
-				cnt++;
+
+		if (j >= i) {
+			tmp = new String[j - i + 1];
+			int cnt = 0;
+			for (int k = i; k <= j; k++) {
+				tmp[cnt++] = st[k];
+			}
+		} else {
+			tmp = new String[i - j + 1];
+			int cnt = 0;
+			for (int k = i; k >= j; k--) {
+				/*
+				 * if (k>=st.length) { System.out.println("ERROR k=" +k+ " i="
+				 * +i+ "j=" +j + " length=" +st.length); }
+				 */
+				tmp[cnt++] = st[k];
 			}
 		}
-
 		return tmp;
+		/*
+		 * int inc = i > j ? -1 : 1; int len = Math.abs(j - i) + 1; tmp = new
+		 * String[len]; int cnt = 0; if (len > 0) { while (true) { if (i >=
+		 * st.length) { System.out.println("length = " + len + " i=" + i); }
+		 * tmp[cnt] = st[i]; if (i == j) break; i = i + inc; cnt++; } }
+		 * 
+		 * return tmp;
+		 */
 	}
 
 	private int findArgMax(MatEl[] scx, MatEl[] scy, boolean right) {

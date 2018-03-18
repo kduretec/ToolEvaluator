@@ -9,7 +9,7 @@ import org.benchmarkdp.toolevaluator.measure.PercCorMeasure;
 import org.benchmarkdp.toolevaluator.measure.TextHistogramDiffMeasure;
 import org.benchmarkdp.toolevaluator.measure.TextIntegrityMeasure;
 import org.benchmarkdp.toolevaluator.measure.TextOrderMeasure;
-import org.benchmarkdp.toolevaluator.measure.TextWERMeasure;
+import org.benchmarkdp.toolevaluator.measure.TextWERLinearMeasure;
 import org.benchmarkdp.toolevaluator.tool.GroundTruthTool;
 import org.benchmarkdp.toolevaluator.tool.ITool;
 import org.benchmarkdp.toolevaluator.tool.SoftwareTool;
@@ -60,7 +60,7 @@ public class App {
 		// measures.add(new OrderMeasure());
 		// measures.add(new IntegrityMeasure());
 		measures.add(new TextHistogramDiffMeasure());
-		measures.add(new TextWERMeasure());
+		measures.add(new TextWERLinearMeasure());
 		measures.add(new PercCorMeasure());
 		measures.add(new TextOrderMeasure());
 		measures.add(new TextIntegrityMeasure());

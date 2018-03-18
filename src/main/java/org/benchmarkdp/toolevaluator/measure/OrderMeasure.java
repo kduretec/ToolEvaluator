@@ -2,15 +2,15 @@ package org.benchmarkdp.toolevaluator.measure;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.IElement;
-import org.benchmarkdp.toolevaluator.utils.WordErrorRate;
+import org.benchmarkdp.toolevaluator.utils.WordErrorRateLinear;
 
 public class OrderMeasure implements IMeasure {
 
 	public void measure(DocumentElements gt, DocumentElements tool) {
 		String gS = getGroundTruthIDs(gt);
 		String tS = getToolIDs(tool);
-		WordErrorRate wer = new WordErrorRate(gS, tS);
-		wer.evaluate();
+		WordErrorRateLinear wer = new WordErrorRateLinear(gS, tS);
+		wer.evaluateWER();
 		int c = wer.getCorrect();
 		int n = wer.getNumberOfWords();
 		double res = (double)c/(double)n;

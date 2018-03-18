@@ -8,7 +8,7 @@ import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.loader.GenericLoader;
 import org.benchmarkdp.toolevaluator.loader.ILoader;
 import org.benchmarkdp.toolevaluator.matcher.IMatcher;
-import org.benchmarkdp.toolevaluator.matcher.TextMatcher;
+import org.benchmarkdp.toolevaluator.matcher.TextMatcherLinear;
 import org.benchmarkdp.toolevaluator.measure.IMeasure;
 import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
@@ -32,7 +32,7 @@ public class Evaluator {
 
 	public Evaluator() {
 		loader = new GenericLoader();
-		matcher = new TextMatcher();
+		matcher = new TextMatcherLinear();
 		output = new XMLOutputWriter();
 	}
 
@@ -61,15 +61,15 @@ public class Evaluator {
 		int currentTestCase = 0;
 		for (String testFile : testNames) {
 			currentTestCase++;
-			if (testFile.compareTo("sample_82209.docx") != 0)
-				continue;
+			//if (testFile.compareTo("sample_45702.docx") != 0)
+			//	continue;
 			System.out.println("Processing TestCase " + testFile);
 			long startTime = System.nanoTime();
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
 			String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
 
 			for (ITool tool : tools) {
-
+				//System.out.println("Tool: " + tool.getToolName()); 
 				if (tool.canProcess(extension)) {
 					DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
 					DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
