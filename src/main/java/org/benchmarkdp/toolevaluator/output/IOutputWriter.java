@@ -5,6 +5,6 @@ import org.benchmarkdp.toolevaluator.tool.ITool;
 
 public interface IOutputWriter {
 
-	public void save(DocumentElements values, String testName, String testFile, ITool tool);
+	public void save(DocumentElements values, String testName, String testFile, String toolName, String toolResPath);
 	
 }

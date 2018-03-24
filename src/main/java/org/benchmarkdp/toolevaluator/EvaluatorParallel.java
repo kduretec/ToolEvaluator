@@ -3,6 +3,9 @@ package org.benchmarkdp.toolevaluator;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.loader.GenericLoader;
@@ -14,7 +17,7 @@ import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
 import org.benchmarkdp.toolevaluator.tool.ITool;
 
-public class Evaluator {
+public class EvaluatorParallel {
 
 	private String documentPath;
 
@@ -30,7 +33,7 @@ public class Evaluator {
 
 	private IOutputWriter output;
 
-	public Evaluator() {
+	public EvaluatorParallel() {
 		loader = new GenericLoader();
 		matcher = new TextMatcherLinear();
 		output = new XMLOutputWriter();
@@ -59,38 +62,40 @@ public class Evaluator {
 		long totalStart = System.nanoTime();
 		int totalTestCases = testNames.length;
 		int currentTestCase = 0;
+
+		ExecutorService exec = Executors.newFixedThreadPool(6);
+
 		for (String testFile : testNames) {
 			currentTestCase++;
-			//if (testFile.compareTo("sample_45702.docx") != 0)
-			//	continue;
-			System.out.println("Processing TestCase " + testFile);
-			long startTime = System.nanoTime();
+			// if (testFile.compareTo("sample_45702.docx") != 0)
+			// continue;
+			// System.out.println("Processing TestCase " + testFile);
 			String testName = testFile.substring(0, testFile.lastIndexOf("."));
 			String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
 
 			for (ITool tool : tools) {
-				//System.out.println("Tool: " + tool.getToolName()); 
+				// System.out.println("Tool: " + tool.getToolName());
 				if (tool.canProcess(extension)) {
 					DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
 					DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
-
-					matcher.match(gtElements, toElements);
-
-					for (IMeasure measure : pMeasures) {
-						measure.measure(gtElements, toElements);
-					}
-
-					output.save(gtElements, testName, testFile, tool.getToolName(), tool.getResultsPath());
+					
+					exec.execute(
+							new EvalProc(testFile, tool.getToolName(), tool.getResultsPath(), gtElements, toElements));
 				}
 			}
-
-			long endTime = System.nanoTime();
-			double elapsedTime = ((double) endTime - startTime) / 1000000000;
-			System.out.println("TestCase[" + currentTestCase + "/" + totalTestCases + "] " + testFile + " processed in "
-					+ elapsedTime + " seconds");
+			
+			
 
 		}
 
+		exec.shutdown();
+		try {
+			exec.awaitTermination(1, TimeUnit.DAYS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		long totalEnd = System.nanoTime();
 		double totalElapsed = ((double) totalEnd - totalStart) / 1000000000;
 		System.out.println("Evaluation done in " + totalElapsed + " seconds");
@@ -101,10 +106,10 @@ public class Evaluator {
 		String[] names = f.list(testFilter);
 		return names;
 	}
-	
+
 	private FilenameFilter testFilter = new FilenameFilter() {
-		public boolean accept (File dir, String name) {
-			if (name.compareTo(".DS_Store")==0) {
+		public boolean accept(File dir, String name) {
+			if (name.compareTo(".DS_Store") == 0) {
 				return false;
 			}
 			return true;

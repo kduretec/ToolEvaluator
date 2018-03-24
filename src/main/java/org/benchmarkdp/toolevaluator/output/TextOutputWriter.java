@@ -56,6 +56,11 @@ public class TextOutputWriter implements IOutputWriter{
 			bw.write(entry.getKey() + "\t" + entry.getValue().toString() + "\n");
 		}
 	}
+
+	public void save(DocumentElements values, String testName, String testFile, String toolName, String toolResPath) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

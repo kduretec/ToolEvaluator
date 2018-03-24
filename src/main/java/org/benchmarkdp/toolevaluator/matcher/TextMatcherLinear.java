@@ -21,6 +21,9 @@ public class TextMatcherLinear implements IMatcher {
 			//System.out.println(" Matching text : " + gE.getTextElement().getText());
 			int pos = 0;
 			int bestC = -1;
+			int bestD = -1;
+			int bestI = -1;
+			int bestS = -1;		
 			int nW = -1;
 			int bestStart = -1;
 			int bestEnd = -1;
@@ -39,6 +42,9 @@ public class TextMatcherLinear implements IMatcher {
 						int c = wer.getCorrect();
 						if (c > bestC) {
 							bestC = c;
+							bestI = wer.getInsertion();
+							bestD = wer.getDeletion();
+							bestS = wer.getSubstitution();
 							nW = wer.getNumberOfWords();
 							bestStart = start + pos;
 							bestEnd = end + pos;
@@ -62,12 +68,21 @@ public class TextMatcherLinear implements IMatcher {
 					gE.setMatchWordPosition(bestStart, bestEnd);
 					gE.setMatchLinePosition(startL, endL);
 
+//					gE.getMeasureElement().addMeasureValue("percCorr", new Double(perc));
+//					gE.getMeasureElement().addMeasureValue("N", new Integer(nW));
+//					gE.getMeasureElement().addMeasureValue("C", new Integer(bestC));
+//					gE.getMeasureElement().addMeasureValue("D", new Integer(bestD));
+//					gE.getMeasureElement().addMeasureValue("I", new Integer(bestI));
+//					gE.getMeasureElement().addMeasureValue("S", new Integer(bestS));
+//					gE.getMeasureElement().addMeasureValue("startWord", new Integer(bestStart));
+//					gE.getMeasureElement().addMeasureValue("endWord", new Integer(bestEnd));
+					
 					Arrays.fill(endWord, bestStart, bestEnd +1, -1);
 					if (bestPos < bestStart) {
 						Arrays.fill(endWord, bestPos, bestStart, bestStart - 1);
 					}
-				}
-			}
+				} 
+			} 
 		}
 
 	}

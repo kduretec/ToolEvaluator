@@ -23,9 +23,10 @@ import org.w3c.dom.Element;
 
 public class XMLOutputWriter implements IOutputWriter{
 
-	public void save(DocumentElements values, String testName, String testFile, ITool tool) {
+	public void save(DocumentElements values, String testName, String testFile, String toolName, String toolResPath) {
 		
-		String pathRes = tool.getResultsPath();
+		//String pathRes = tool.getResultsPath();
+		String pathRes = toolResPath;
 		
 		createResDir(pathRes); 
 
@@ -38,7 +39,7 @@ public class XMLOutputWriter implements IOutputWriter{
 			doc.appendChild(rootElement);
 			
 			Element t = doc.createElement("tool");
-			t.appendChild(doc.createTextNode(tool.getToolName()));
+			t.appendChild(doc.createTextNode(toolName));
 			Element inpt = doc.createElement("input");
 			inpt.appendChild(doc.createTextNode(testName));
 			rootElement.appendChild(t);

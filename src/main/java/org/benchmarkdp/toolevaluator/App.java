@@ -22,7 +22,7 @@ import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
  */
 public class App {
 
-	private Evaluator evaluator;
+	private EvaluatorParallel evaluator;
 
 	private String experimentName = "ExperimentTest";
 	//MAC path 
@@ -38,7 +38,7 @@ public class App {
 	private String resultsOutput = mainPath + experimentName + "/Results/Tools";
 
 	public App() {
-		evaluator = new Evaluator();
+		evaluator = new EvaluatorParallel();
 		evaluator.setDocumentsPath(mainPath + experimentName + "/Documents");
 		initializeMeasures();
 		initializeTools();
@@ -59,7 +59,7 @@ public class App {
 		// measures.add(new PercCorMeasure());
 		// measures.add(new OrderMeasure());
 		// measures.add(new IntegrityMeasure());
-		measures.add(new TextHistogramDiffMeasure());
+		//measures.add(new TextHistogramDiffMeasure());
 		measures.add(new TextWERLinearMeasure());
 		measures.add(new PercCorMeasure());
 		measures.add(new TextOrderMeasure());
@@ -97,9 +97,9 @@ public class App {
 		//		new GenericParser(), Arrays.asList("pdf"));
 		tools.add(tika11);
 		tools.add(tika12);
-		// tools.add(tika113);
+		tools.add(tika113);
 		// tools.add(textUtil);
-		// tools.add(docToText);
+		tools.add(docToText);
 		//tools.add(abiWord);
 		// tools.add(libreOffice);
 		// tools.add(xpdf);
