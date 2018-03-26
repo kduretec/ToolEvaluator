@@ -84,8 +84,6 @@ public class EvaluatorParallel {
 				}
 			}
 			
-			
-
 		}
 
 		exec.shutdown();

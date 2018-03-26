@@ -17,14 +17,14 @@ import org.benchmarkdp.toolevaluator.tool.parser.GenericParser;
 import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
 
 /**
- * Hello world!
+ * Main class
  *
  */
 public class App {
 
 	private EvaluatorParallel evaluator;
 
-	private String experimentName = "ExperimentTest";
+	private String experimentName = "Experiment_50";
 	//MAC path 
 	private String mainPath = "/Users/kresimir/Dropbox/Work/Projects/BenchmarkDP/publications/INFSOF/experiments/Generated/";
 
@@ -99,7 +99,7 @@ public class App {
 		tools.add(tika12);
 		tools.add(tika113);
 		// tools.add(textUtil);
-		tools.add(docToText);
+		//tools.add(docToText);
 		//tools.add(abiWord);
 		// tools.add(libreOffice);
 		// tools.add(xpdf);
