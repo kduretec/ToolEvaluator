@@ -74,8 +74,8 @@ public class TextMatcherLinear implements IMatcher {
 //					gE.getMeasureElement().addMeasureValue("D", new Integer(bestD));
 //					gE.getMeasureElement().addMeasureValue("I", new Integer(bestI));
 //					gE.getMeasureElement().addMeasureValue("S", new Integer(bestS));
-//					gE.getMeasureElement().addMeasureValue("startWord", new Integer(bestStart));
-//					gE.getMeasureElement().addMeasureValue("endWord", new Integer(bestEnd));
+					gE.getMeasureElement().addMeasureValue("startWord", new Integer(bestStart));
+					gE.getMeasureElement().addMeasureValue("endWord", new Integer(bestEnd));
 					
 					Arrays.fill(endWord, bestStart, bestEnd +1, -1);
 					if (bestPos < bestStart) {

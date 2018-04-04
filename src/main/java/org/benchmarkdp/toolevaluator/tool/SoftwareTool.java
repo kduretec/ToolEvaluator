@@ -2,11 +2,11 @@
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.Text;
+import org.benchmarkdp.toolevaluator.tool.parser.GenericParser;
 import org.benchmarkdp.toolevaluator.tool.parser.IParser;
 
 public class SoftwareTool extends AbstractTool {
@@ -33,6 +33,14 @@ public class SoftwareTool extends AbstractTool {
 		formatsSupported = fS;
 	}
 
+	public ITool cloneTool() { 
+		List<String> newFS = new ArrayList<String>();
+		for (String s : formatsSupported) {
+			newFS.add(s);
+		}
+		return new SoftwareTool(toolName, pathToolFolder, pathResults, new GenericParser(), newFS);
+	}
+	
 	public String getToolName() {
 		return toolName;
 	}
@@ -86,4 +94,5 @@ public class SoftwareTool extends AbstractTool {
 		
 		return toolOutput;
 	}
+
 }

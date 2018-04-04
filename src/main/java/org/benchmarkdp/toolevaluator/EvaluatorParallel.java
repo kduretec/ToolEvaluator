@@ -63,7 +63,7 @@ public class EvaluatorParallel {
 		int totalTestCases = testNames.length;
 		int currentTestCase = 0;
 
-		ExecutorService exec = Executors.newFixedThreadPool(6);
+		ExecutorService exec = Executors.newFixedThreadPool(4);
 
 		for (String testFile : testNames) {
 			currentTestCase++;
@@ -76,11 +76,11 @@ public class EvaluatorParallel {
 			for (ITool tool : tools) {
 				// System.out.println("Tool: " + tool.getToolName());
 				if (tool.canProcess(extension)) {
-					DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
-					DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
+					//DocumentElements gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
+					//DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
 					
 					exec.execute(
-							new EvalProc(testFile, tool.getToolName(), tool.getResultsPath(), gtElements, toElements));
+							new EvalProc(testFile, tool.getToolName(), tool.getResultsPath(), groundTruthTool.cloneTool(), tool.cloneTool()));
 				}
 			}
 			

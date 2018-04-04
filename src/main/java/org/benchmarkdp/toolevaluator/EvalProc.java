@@ -32,7 +32,9 @@ public class EvalProc implements Runnable {
 	DocumentElements gtElements;
 	DocumentElements toElements;
 
-	public EvalProc(String tF, String tN, String trp, DocumentElements gtE, DocumentElements toE) {
+	ITool groundTruthTool;
+	ITool tool;
+	public EvalProc(String tF, String tN, String trp, ITool gt, ITool tt) {
 		// pMeasures = m;
 		testFile = tF;
 		toolName = tN;
@@ -40,8 +42,10 @@ public class EvalProc implements Runnable {
 		loader = new GenericLoader();
 		matcher = new TextMatcherLinear();
 		output = new XMLOutputWriter();
-		gtElements = gtE;
-		toElements = toE;
+		//gtElements = gtE;
+		//toElements = toE;
+		groundTruthTool = gt;
+		tool = tt;
 		pMeasures = new ArrayList<IMeasure>();
 		// measures.add(new WERMeasure());
 		// measures.add(new PercCorMeasure());
@@ -61,6 +65,9 @@ public class EvalProc implements Runnable {
 		String testName = testFile.substring(0, testFile.lastIndexOf("."));
 		String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
 
+		gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
+		toElements = loader.getToolOutput(testName, extension, tool);
+		
 		//System.out.println("Processing testName=" + testName + " tool=" + toolName);
 		matcher.match(gtElements, toElements);
 

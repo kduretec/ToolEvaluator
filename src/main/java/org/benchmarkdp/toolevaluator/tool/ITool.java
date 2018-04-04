@@ -19,4 +19,6 @@ public interface ITool {
 	
 	public DocumentElements getDocumentElements(String testCase, String testFormat, String fileExtension);
 	
+	public ITool cloneTool();
+	
 }

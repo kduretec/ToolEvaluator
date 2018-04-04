@@ -7,6 +7,7 @@ import org.benchmarkdp.toolevaluator.elements.DocumentElements;
 import org.benchmarkdp.toolevaluator.elements.GroundTruthElement;
 import org.benchmarkdp.toolevaluator.elements.Text;
 import org.benchmarkdp.toolevaluator.elements.ToolElement;
+import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
 import org.benchmarkdp.toolevaluator.tool.parser.IParser;
 
 public class GroundTruthTool extends SoftwareTool{
@@ -28,6 +29,10 @@ public class GroundTruthTool extends SoftwareTool{
 		parser = par;
 		pathToolFolder = pathText;
 		pathResults = resultsPath;
+	}
+	
+	public ITool cloneTool() {
+		return new GroundTruthTool(toolName, pathToolFolder, pathResults, new GroundTruthParser());
 	}
 	
 	public boolean canProcess(String format) {
