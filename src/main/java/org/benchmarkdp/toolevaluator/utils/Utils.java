@@ -2,7 +2,7 @@ package org.benchmarkdp.toolevaluator.utils;
 
 public class Utils {
 
-	public static String experimentName = "Experiment_345";
+	public static String experimentName = "Experiment_50";
 	//MAC path 
 	public static String mainPath = "/Users/kresimir/Dropbox/Work/Projects/BenchmarkDP/publications/INFSOF/experiments/Generated/";
 
@@ -14,5 +14,7 @@ public class Utils {
 	public static String groundTruthPath = mainPath + experimentName + "/GroundTruth/Text";
 	
 	public static String resultsOutput = mainPath + experimentName + "/Results/Tools";
+	
+	public static int numberOfProcessor = 4; 
 	
 }

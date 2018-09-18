@@ -20,6 +20,8 @@ public class Text {
 	
 	private String ID; 
 	
+	private String elementType;
+	
 	public Text() {
 		lines = new ArrayList<String>(); 
 	}
@@ -39,6 +41,14 @@ public class Text {
 	
 	public String getID() {
 		return ID;
+	}
+	
+	public String getElementType() {
+		return elementType;
+	}
+	
+	public void setElementType(String et) {
+		elementType = et;
 	}
 	
 	public List<String> getLines() {

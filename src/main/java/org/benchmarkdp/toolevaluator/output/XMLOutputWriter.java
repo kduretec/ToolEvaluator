@@ -51,6 +51,9 @@ public class XMLOutputWriter implements IOutputWriter{
 				Element id = doc.createElement("ID");
 				id.appendChild(doc.createTextNode(dEl.getTextElement().getID()));
 				el.appendChild(id);
+				Element et = doc.createElement("elementType");
+				et.appendChild(doc.createTextNode(dEl.getTextElement().getElementType()));
+				el.appendChild(et);
 				Element m = getMeasuresAsElement(doc, dEl.getMeasureElement());
 				el.appendChild(m);
 				elResult.appendChild(el);

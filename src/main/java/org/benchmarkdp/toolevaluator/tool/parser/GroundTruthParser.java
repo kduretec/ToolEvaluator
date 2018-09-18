@@ -30,6 +30,7 @@ public class GroundTruthParser extends AbstractParser {
 		
 	public List<Text> parseToTextElements(String text, String format) {
 
+		text = text.trim().replaceFirst("^([\\W]+)<","<"); 
 		allWords = new ArrayList<String>();
 		wordHistogram = new HashMap<String, Integer>();
 		
@@ -46,6 +47,7 @@ public class GroundTruthParser extends AbstractParser {
 				if (nodes.item(i) instanceof Element) {
 					Element tmp = (Element) nodes.item(i);
 					Node id = tmp.getElementsByTagName("ID").item(0);
+					Node eType = tmp.getElementsByTagName("ElementType").item(0);
 					Node txt = tmp.getElementsByTagName("text").item(0);
 					Node lNode = tmp.getElementsByTagName("lines").item(0);
 					List<String> lines = new ArrayList<String>();
@@ -60,6 +62,7 @@ public class GroundTruthParser extends AbstractParser {
 					}
 					Text txtEl = new Text();
 					txtEl.setID(id.getTextContent());
+					txtEl.setElementType(eType.getTextContent());
 					String maintext = removeAllFormating(txt.getTextContent());
 					String[] wordsEl = maintext.split(" ");
 					addTextToHist(wordsEl);

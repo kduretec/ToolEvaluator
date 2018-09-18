@@ -16,6 +16,7 @@ import org.benchmarkdp.toolevaluator.measure.IMeasure;
 import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
 import org.benchmarkdp.toolevaluator.tool.ITool;
+import org.benchmarkdp.toolevaluator.utils.Utils;
 
 public class EvaluatorParallel {
 
@@ -63,7 +64,7 @@ public class EvaluatorParallel {
 		int totalTestCases = testNames.length;
 		int currentTestCase = 0;
 
-		ExecutorService exec = Executors.newFixedThreadPool(4);
+		ExecutorService exec = Executors.newFixedThreadPool(Utils.numberOfProcessor);
 
 		for (String testFile : testNames) {
 			currentTestCase++;

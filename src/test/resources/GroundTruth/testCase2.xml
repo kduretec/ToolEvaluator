@@ -4,6 +4,7 @@
   <textElements>
     <element>
       <ID>100</ID>
+      <ElementType>Paragarph</ElementType>
       <text>Hello world</text>
     </element>
   </textElements>
