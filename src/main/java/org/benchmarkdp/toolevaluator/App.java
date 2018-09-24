@@ -96,7 +96,7 @@ public class App {
 			TestCaseHandler tch = new TestCaseHandler();
 			tCC = tch.load(pr, false);
 			log.info("Loaded " + tCC.getTestCases().size() + " test cases");
-			EvaluatorService eService = new EvaluatorService(); 
+			EvaluatorService eService = new EvaluatorService();
 			if (cmd.hasOption("p")) {
 				int numProc = Integer.parseInt(cmd.getOptionValue("p"));
 				eService.setNumProc(numProc);
@@ -104,9 +104,11 @@ public class App {
 			ToolTaskLoader toolLoader = new ToolTaskLoader();
 			List<IToolTask> tasks = toolLoader.getTasks(pr, tCC);
 			log.info("Task loaded " + tasks.size());
-			if (cmd.hasOption("t")) {
-				for (IToolTask tsk : tasks) {
+			for (IToolTask tsk : tasks) {
+				if (cmd.hasOption("t")) {
 					eService.addRunnable(tsk.getExtractionProc());
+				} else {
+					eService.addRunnable(tsk.getEvaluationProc());
 				}
 			}
 			eService.execute();
@@ -115,7 +117,6 @@ public class App {
 		}
 	}
 
-	
 	private void initializeCMD() {
 		options = new Options();
 
@@ -155,12 +156,11 @@ public class App {
 				String pathM = mainFolder + "tmp/";
 				ZipUtil.unzipFile(zipPath, pathM);
 				File fExp = new File(pathMExp);
-				/*if (fExp.exists()) {
-					File tO = new File(pathMExp + "/ToolOutput/");
-					tO.mkdir();
-					File res = new File(pathMExp + "/Results/");
-					res.mkdir();
-				}*/
+				/*
+				 * if (fExp.exists()) { File tO = new File(pathMExp +
+				 * "/ToolOutput/"); tO.mkdir(); File res = new File(pathMExp +
+				 * "/Results/"); res.mkdir(); }
+				 */
 
 				propFile = new File(propPath);
 				if (propFile.exists()) {
@@ -177,10 +177,7 @@ public class App {
 			return null;
 		}
 	}
-	
-	
-	
-	
+
 	private void initializeMeasures() {
 		List<IMeasure> measures = new ArrayList<IMeasure>();
 		// measures.add(new WERMeasure());
