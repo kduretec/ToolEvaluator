@@ -81,7 +81,7 @@ public class EvaluatorParallel {
 					//DocumentElements toElements = loader.getToolOutput(testName, extension, tool);
 					
 					exec.execute(
-							new EvalProc(testFile, tool.getToolName(), tool.getResultsPath(), groundTruthTool.cloneTool(), tool.cloneTool()));
+							new EvaluationProc(testFile, tool.getToolName(), tool.getResultsPath(), groundTruthTool.cloneTool(), tool.cloneTool()));
 				}
 			}
 			

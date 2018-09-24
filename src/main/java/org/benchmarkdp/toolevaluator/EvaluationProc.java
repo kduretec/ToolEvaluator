@@ -17,7 +17,7 @@ import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
 import org.benchmarkdp.toolevaluator.tool.ITool;
 
-public class EvalProc implements Runnable {
+public class EvaluationProc implements Runnable {
 
 	private List<IMeasure> pMeasures;
 
@@ -34,7 +34,7 @@ public class EvalProc implements Runnable {
 
 	ITool groundTruthTool;
 	ITool tool;
-	public EvalProc(String tF, String tN, String trp, ITool gt, ITool tt) {
+	public EvaluationProc(String tF, String tN, String trp, ITool gt, ITool tt) {
 		// pMeasures = m;
 		testFile = tF;
 		toolName = tN;
