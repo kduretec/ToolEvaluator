@@ -31,8 +31,9 @@ public class EvaluatorService {
 
 	public void execute() {
 
+		long startTime = System.nanoTime();
 		ExecutorService exec = Executors.newFixedThreadPool(numProc);
-		log.info("Evaluator has " + runnables.size() + " tasks");
+		log.info("Evaluator has detected " + runnables.size() + " tasks");
 		for (Runnable r : runnables) {
 			if (r != null) {
 				exec.execute(r);
@@ -46,7 +47,9 @@ public class EvaluatorService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		log.info("Execution done");
+		long endTime = System.nanoTime();
+		double elapsedTime = ((double) endTime - startTime) / 1000000000;
+		log.info("Execution done in " + elapsedTime + " seconds");
 	}
 
 }

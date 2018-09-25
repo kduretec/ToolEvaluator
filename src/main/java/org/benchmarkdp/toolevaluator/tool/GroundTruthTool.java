@@ -46,6 +46,7 @@ public class GroundTruthTool extends SoftwareTool{
 		
 		DocumentElements toolOutput = new DocumentElements();
 		String path = pathToolFolder + "/" + testCase + "." + fileExtension;
+		//System.out.println("PATH GRTR= " + path);
 		File f = new File(path);
 		if (f.exists()) {
 			String s = readFileToString(f);

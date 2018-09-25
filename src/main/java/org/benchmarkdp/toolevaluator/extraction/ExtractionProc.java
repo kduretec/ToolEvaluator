@@ -52,10 +52,10 @@ public class ExtractionProc implements Runnable{
 		File f = new File(outputFile);
 		if (f.exists()) {
 			toolTask.setSuccessful(true);
-			log.info("File is there");
+			//log.info("File is there");
 		} else {
 			toolTask.setSuccessful(false);
-			log.info("File is not there");
+			//log.info("File is not there");
 		}
 	}
 

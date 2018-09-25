@@ -16,8 +16,12 @@ import org.benchmarkdp.toolevaluator.measure.TextWERLinearMeasure;
 import org.benchmarkdp.toolevaluator.output.IOutputWriter;
 import org.benchmarkdp.toolevaluator.output.XMLOutputWriter;
 import org.benchmarkdp.toolevaluator.tool.ITool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EvaluationProc implements Runnable {
+
+	private static Logger log = LoggerFactory.getLogger(EvaluationProc.class);
 
 	private List<IMeasure> pMeasures;
 
@@ -34,6 +38,7 @@ public class EvaluationProc implements Runnable {
 
 	ITool groundTruthTool;
 	ITool tool;
+
 	public EvaluationProc(String tF, String tN, String trp, ITool gt, ITool tt) {
 		// pMeasures = m;
 		testFile = tF;
@@ -42,8 +47,8 @@ public class EvaluationProc implements Runnable {
 		loader = new GenericLoader();
 		matcher = new TextMatcherLinear();
 		output = new XMLOutputWriter();
-		//gtElements = gtE;
-		//toElements = toE;
+		// gtElements = gtE;
+		// toElements = toE;
 		groundTruthTool = gt;
 		tool = tt;
 		pMeasures = new ArrayList<IMeasure>();
@@ -64,11 +69,11 @@ public class EvaluationProc implements Runnable {
 		long startTime = System.nanoTime();
 		String testName = testFile.substring(0, testFile.lastIndexOf("."));
 		String extension = testFile.substring(testFile.lastIndexOf(".") + 1, testFile.length());
-
+		//log.info("Test case name " + testName + " extension " + extension);
 		gtElements = loader.getGroundTruth(testName, extension, groundTruthTool);
 		toElements = loader.getToolOutput(testName, extension, tool);
-		
-		//System.out.println("Processing testName=" + testName + " tool=" + toolName);
+
+		//log.info("Processing testName=" + testName + " tool=" + toolName);
 		matcher.match(gtElements, toElements);
 
 		for (IMeasure measure : pMeasures) {
@@ -79,7 +84,6 @@ public class EvaluationProc implements Runnable {
 
 		long endTime = System.nanoTime();
 		double elapsedTime = ((double) endTime - startTime) / 1000000000;
-		System.out.println(
-				"TestCase=" + testName + " toolName=" + toolName + " processed in " + elapsedTime + " seconds");
+		log.info("TestCase=" + testName + " toolName=" + toolName + " processed in " + elapsedTime + " seconds");
 	}
 }
