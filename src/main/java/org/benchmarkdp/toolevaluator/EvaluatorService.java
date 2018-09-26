@@ -37,7 +37,7 @@ public class EvaluatorService {
 		for (Runnable r : runnables) {
 			if (r != null) {
 				exec.execute(r);
-			}
+			} 
 		}
 
 		exec.shutdown();

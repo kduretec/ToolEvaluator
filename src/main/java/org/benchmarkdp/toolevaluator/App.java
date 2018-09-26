@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.cli.CommandLine;
@@ -105,11 +106,18 @@ public class App {
 			ToolTaskLoader toolLoader = new ToolTaskLoader();
 			List<IToolTask> tasks = toolLoader.getTasks(pr, tCC);
 			log.info("Task loaded " + tasks.size());
-			for (IToolTask tsk : tasks) {
+			for (Iterator<IToolTask> tskIterator = tasks.iterator(); tskIterator.hasNext();) {
+				IToolTask tsk = tskIterator.next();
+				Runnable runT = null;
 				if (cmd.hasOption("t")) {
-					eService.addRunnable(tsk.getExtractionProc());
+					runT = tsk.getExtractionProc();
 				} else {
-					eService.addRunnable(tsk.getEvaluationProc());
+					runT = tsk.getEvaluationProc();
+				}
+				if (runT == null) {
+					tskIterator.remove();
+				} else {
+					eService.addRunnable(runT);
 				}
 			}
 			eService.execute();

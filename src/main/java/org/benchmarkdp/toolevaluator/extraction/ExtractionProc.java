@@ -40,6 +40,7 @@ public class ExtractionProc implements Runnable{
 			}
 			p.waitFor();
 			//InputStream is = p.getInputStream();
+			//InputStream is = p.getErrorStream();
 			//log.info(IOUtils.toString(is,"UTF-8"));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
