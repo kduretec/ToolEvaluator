@@ -103,8 +103,9 @@ public class App {
 				int numProc = Integer.parseInt(cmd.getOptionValue("p"));
 				eService.setNumProc(numProc);
 			}
+			boolean pdfOnly = cmd.hasOption("pdf"); 
 			ToolTaskLoader toolLoader = new ToolTaskLoader();
-			List<IToolTask> tasks = toolLoader.getTasks(pr, tCC);
+			List<IToolTask> tasks = toolLoader.getTasks(pr, tCC, pdfOnly);
 			log.info("Task loaded " + tasks.size());
 			for (Iterator<IToolTask> tskIterator = tasks.iterator(); tskIterator.hasNext();) {
 				IToolTask tsk = tskIterator.next();
@@ -124,6 +125,9 @@ public class App {
 		} else {
 			log.warn("Unknown experiment, EXITING");
 		}
+		if (cmd.hasOption("s")) {
+			sendBackExperiment(experimentName);
+		}
 	}
 
 	private void initializeCMD() {
@@ -132,9 +136,13 @@ public class App {
 		Option experimentName = Option.builder("e").hasArg(true).desc("experiment name").build();
 		Option procNumber = Option.builder("p").hasArg(true).desc("number of processes").build();
 		Option textExtraction = Option.builder("t").hasArg(false).desc("extrcat text").build();
+		Option sendBack = Option.builder("s").hasArg(false).desc("send back to main machine").build();
+		Option pdfOnly = Option.builder("pdf").hasArg(false).desc("is only pdf format available").build();
 		options.addOption(experimentName);
 		options.addOption(procNumber);
 		options.addOption(textExtraction);
+		options.addOption(sendBack);
+		options.addOption(pdfOnly);
 	}
 
 	private CommandLine parseArgs(String[] args) {
@@ -184,6 +192,20 @@ public class App {
 		} else {
 			log.info("ZIP file " + zipFile.getAbsolutePath() + " not found");
 			return null;
+		}
+	}
+	
+	private void sendBackExperiment(String experimentName) {
+		String pathExp = mainFolder + "tmp/" + experimentName;
+		File mFF = new File(pathExp);
+		
+		if (mFF.exists()) {
+			try {
+				ZipUtil.zipFolder(pathExp, FolderOut, experimentName);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 		}
 	}
 

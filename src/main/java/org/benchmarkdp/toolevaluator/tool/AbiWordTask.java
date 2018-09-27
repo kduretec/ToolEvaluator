@@ -11,18 +11,17 @@ import org.benchmarkdp.toolevaluator.tool.parser.GroundTruthParser;
 import benchmarkdp.datagenerator.properties.ExperimentProperties;
 import benchmarkdp.datagenerator.testcase.TestCase;
 
-public class DocToTextTask extends AbstractToolTask{
+public class AbiWordTask extends AbstractToolTask{
 
-	protected String tool="bash /home/duretec/Programs/doctotext/doctotext.sh"; 
-	protected String toolName="DocToText"; 
-	protected String toolNameNice="DocToText v4.01512"; 
+	protected String tool="abiword"; 
+	protected String toolName="AbiWord"; 
+	protected String toolNameNice="AbiWord v3.0.0"; 
 	
-	public DocToTextTask(ExperimentProperties ep, TestCase tc) {
+	public AbiWordTask(ExperimentProperties ep, TestCase tc) {
 		super(ep, tc);
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	@Override
 	public ExtractionProc getExtractionProc() {
 
@@ -40,7 +39,7 @@ public class DocToTextTask extends AbstractToolTask{
 		if (oF.exists()) {
 			return null;
 		}
-		command = command + " " + inputFile + " > " + outputFile;
+		command = command + " --to=txt --to-name=" + outputFile + " " + inputFile;
 		//System.out.println(command);
 		ExtractionProc eproc = new ExtractionProc(new String[] { "bash", "-c", command }, outputFile, this);
 		return eproc;
@@ -57,14 +56,14 @@ public class DocToTextTask extends AbstractToolTask{
 		if (oF.exists()) {
 			return null;
 		}
-		ITool tika = new SoftwareTool(toolNameNice, toolOutput + "/"+ toolName + "/text",
+		ITool abiword = new SoftwareTool(toolNameNice, toolOutput + "/"+ toolName + "/text",
 				resultsOutput + "/" + toolName + "/results", new GenericParser(), Arrays.asList("docx", "odt", "pdf"));
 
 		String docFile = tc.getGeneratedDocument();
 		docFile = docFile.substring(docFile.lastIndexOf(File.separator) + 1);
 		ITool gtTool = new GroundTruthTool("GroundTruth", groundTruth, null, new GroundTruthParser());
-		EvaluationProc evalProc = new EvaluationProc(docFile, tika.getToolName(), tika.getResultsPath(), gtTool,
-				tika);
+		EvaluationProc evalProc = new EvaluationProc(docFile, abiword.getToolName(), abiword.getResultsPath(), gtTool,
+				abiword);
 		return evalProc;
 	}
 	
