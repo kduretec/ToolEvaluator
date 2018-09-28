@@ -22,12 +22,13 @@ import benchmarkdp.datagenerator.testcase.TestCaseContainer;
 public class ToolTaskLoader {
 
 	private static Logger log = LoggerFactory.getLogger(ToolTaskLoader.class);
-	
+
 	public ToolTaskLoader() {
 
 	}
 
-	public List<IToolTask> getTasks(ExperimentProperties ep, TestCaseContainer tCC, boolean pdfOnly) {
+	public List<IToolTask> getTasks(ExperimentProperties ep, TestCaseContainer tCC) {
+		boolean pdfOnly = ep.getMutationSettings().compareTo("PDF_FORMAT") == 0;
 		List<IToolTask> tasks = new ArrayList<IToolTask>();
 		for (TestCase tc : tCC.getTestCases()) {
 			tasks.addAll(addTaskForTestCase(ep, tc, pdfOnly));
@@ -38,7 +39,7 @@ public class ToolTaskLoader {
 	private List<IToolTask> addTaskForTestCase(ExperimentProperties ep, TestCase tc, boolean pdfOnly) {
 		List<IToolTask> tasks = addTaskAllFormat(ep, tc);
 		if (pdfOnly) {
-			//log.info("Adding tools which can only extract pdf");
+			// log.info("Adding tools which can only extract pdf");
 			tasks.addAll(addTaskPdfOnly(ep, tc));
 		}
 		return tasks;

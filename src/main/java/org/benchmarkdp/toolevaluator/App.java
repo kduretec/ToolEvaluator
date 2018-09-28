@@ -103,9 +103,8 @@ public class App {
 				int numProc = Integer.parseInt(cmd.getOptionValue("p"));
 				eService.setNumProc(numProc);
 			}
-			boolean pdfOnly = cmd.hasOption("pdf"); 
 			ToolTaskLoader toolLoader = new ToolTaskLoader();
-			List<IToolTask> tasks = toolLoader.getTasks(pr, tCC, pdfOnly);
+			List<IToolTask> tasks = toolLoader.getTasks(pr, tCC);
 			log.info("Task loaded " + tasks.size());
 			for (Iterator<IToolTask> tskIterator = tasks.iterator(); tskIterator.hasNext();) {
 				IToolTask tsk = tskIterator.next();
@@ -137,12 +136,12 @@ public class App {
 		Option procNumber = Option.builder("p").hasArg(true).desc("number of processes").build();
 		Option textExtraction = Option.builder("t").hasArg(false).desc("extrcat text").build();
 		Option sendBack = Option.builder("s").hasArg(false).desc("send back to main machine").build();
-		Option pdfOnly = Option.builder("pdf").hasArg(false).desc("is only pdf format available").build();
+		//Option pdfOnly = Option.builder("pdf").hasArg(false).desc("is only pdf format available").build();
 		options.addOption(experimentName);
 		options.addOption(procNumber);
 		options.addOption(textExtraction);
 		options.addOption(sendBack);
-		options.addOption(pdfOnly);
+		//options.addOption(pdfOnly);
 	}
 
 	private CommandLine parseArgs(String[] args) {
